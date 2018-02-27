@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+ @font-face {
+    font-family: 'SlatePro';
+    font-style: normal;
+    src: url(https://css.s-hawaiianairlines.com/Content/assets/fonts/SlatePro/3354DA_1_0.woff2) format('woff2');
+}
+
+:root {
+    --primary: rgba(238, 69, 61, 1);
+    --secondary: rgba(197, 23, 136, 1);
+    --purple-dark: rgba(90, 16, 93, 1);
+    --purple-light: rgba(70, 60, 143, 1);
+}
+
+body {
+    font-family: 'SlatePro', sans-serif;
+
+    background-color: var(--primary);
+}
+
