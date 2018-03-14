@@ -2,7 +2,7 @@
 
 ## Scripts
 
-To start the server, all you need to do is `npm run start` right now. This will use nodemon and restart the server whenever anything under `lib` changes
+To start the server, all you need to do is `npm run start` or `yarn run start` right now. This will use nodemon and restart the server whenever anything under `lib` changes
 
 
 ## nvmrc
