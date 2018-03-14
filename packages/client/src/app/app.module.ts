@@ -1,17 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
-
 import { AppComponent } from './app.component';
-import { GpsTrackerComponent } from '../components/gps-tracker/gps-tracker.component';
+import { routing } from './app.routing';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    GpsTrackerComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    routing
   ],
   providers: [],
   bootstrap: [AppComponent],
