@@ -1,6 +1,6 @@
 {
   "watch": [
-    "lib",
+    "src",
     "index.js"
   ],
   "ext": "ts, js"
