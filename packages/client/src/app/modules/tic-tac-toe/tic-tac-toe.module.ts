@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TicTacToeComponent } from './tic-tac-toe/tic-tac-toe.component';
 import { Routes, RouterModule } from '@angular/router';
 import { TicTacToeService } from './tic-tac-toe.service';
+import { RoomsComponent } from './rooms/rooms.component';
 
 
 
@@ -17,7 +18,7 @@ export const routing: ModuleWithProviders = RouterModule.forChild(routes);
     CommonModule,
     routing
   ],
-  declarations: [TicTacToeComponent],
+  declarations: [TicTacToeComponent, RoomsComponent],
   providers: [TicTacToeService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
