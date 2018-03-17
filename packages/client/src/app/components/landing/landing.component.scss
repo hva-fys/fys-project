@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+.card {
+  h2 {
+    background-color: var(--purple-dark);
+    margin:0;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: white;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: normal;
+  }
+  margin: 8px;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
+  width: 300px;
+  .title {
+    padding-top:16px;
+    padding-bottom: 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  .content {
+    padding: 16px;
+    color: rgb(67, 67, 67);
+  }
+
+  .action-buttons {
+    padding:8px 16px;
+    display: flex;
+    justify-content: flex-end;
+    a {
+     appearance: none;
+     height: 36px;
+     padding: 0px 16px;
+     color: black;
+     text-align: center;
+     text-decoration: none;
+     line-height: 36px;
+     transition: .3s;
+     &:hover {
+        background-color: rgba(0,0,0,.12);
+     }
+     a:visited, a:link {
+      text-decoration: none;
+      color: black;
+     }
+    }
+  }
+}
