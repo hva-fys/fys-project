@@ -1,3 +1,22 @@
-<p>
-  rooms works!
-</p>
+<mat-card class="rooms">
+  <mat-card-title>
+    Rooms
+  </mat-card-title>
+  <mat-list>
+    <ng-container *ngFor="let room of rooms$ | async; let last = last">
+      <mat-list-item>
+        <mat-icon mat-list-icon>access_time</mat-icon>
+        <h4 mat-line>Created {{room.created_on}}</h4>
+        <p mat-line>
+           {{room.name}}
+        </p>
+        <button mat-button color="primary" [routerLink]="['./game/' + room.id ]">Join</button>
+      </mat-list-item>
+      <mat-divider *ngIf="!last"></mat-divider>
+    </ng-container>
+  </mat-list>
+</mat-card>
+
+<button mat-fab (click)="addRoom()">
+  <mat-icon aria-label="Add a room">add</mat-icon>
+</button>

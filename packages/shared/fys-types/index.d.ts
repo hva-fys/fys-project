@@ -6,7 +6,11 @@ export declare namespace TicTacToe {
     interface IRoom {
         /** Name of room */
         name: string;
-        /** Creator of the room */
-        created_by?: string;
+        /** Creator date */
+        created_on?: string;
+        /** Room id */
+        id: string;
     }
+
+    type TSocketEvent = 'get-rooms' | 'add-room' | 'rooms';
 }
