@@ -21,7 +21,9 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "rxjs": "^5.5.7",
     "socket.io": "^2.0.4",
+    "ts-express-decorators": "^4.8.0",
     "ts-node": "^3.0.4",
     "typescript": "^2.3.2"
   }

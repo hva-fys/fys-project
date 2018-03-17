@@ -1,6 +1,6 @@
 {
   "watch": [
-    "lib",
+    "api/**/*.ts",
     "index.js"
   ],
   "ext": "ts, js"
