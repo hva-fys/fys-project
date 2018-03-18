@@ -7,7 +7,9 @@
     "start": "nodemon index.js",
     "build": "(cd ../client/ && npm run build) && npm run copy_public && npm run commit_build",
     "copy_public": "cp -r ../client/dist ./public",
-    "commit_build": "git add ./public/ && git commit -m 'chore(build): updates public folder' "
+    "commit_build": "git add ./public/ && git commit -m 'chore(build): updates public folder' ",
+    "start-background": "forever start index.js",
+    "stop-background": "forever stop index.js"
   },
   "author": {
     "name": "Abdalla Elmedny",
@@ -16,10 +18,11 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/dotenv-safe": "^4.0.1",
     "@types/express": "^4.11.1",
     "@types/lodash": "^4.14.105",
     "@types/socket.io": "^1.4.31",
-    "@types/dotenv-safe": "^4.0.1",
+    "forever": "^0.15.3",
     "nodemon": "^1.11.0"
   },
   "dependencies": {
