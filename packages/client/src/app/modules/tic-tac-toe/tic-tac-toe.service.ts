@@ -3,8 +3,10 @@ import * as io from 'socket.io-client';
 import { Observable } from 'rxjs/Observable';
 import * as fys from 'fys';
 import { share, map, take } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
-const SOCKET_END_POINT = '192.168.1.16:3000/tic-tac-toe';
+// environment.
+const SOCKET_END_POINT = `${environment.host}/tic-tac-toe`;
 
 interface TicTacToeServiceState {
   rooms$: Observable<fys.TicTacToe.IRoom[]>;
@@ -22,6 +24,11 @@ export class TicTacToeService {
 
   constructor() {
     this.socket = io(SOCKET_END_POINT).connect();
+
+  }
+
+  public makeMove( moveIndex: number ) {
+
   }
 
   public joinRoom( roomId: string ) {
