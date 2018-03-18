@@ -10,7 +10,22 @@ export declare namespace TicTacToe {
         created_on?: string;
         /** Room id */
         id: string;
+        /** Whether the room is joinable or not */
+        joinable: boolean;
     }
 
-    type TSocketEvent = 'get-rooms' | 'add-room' | 'rooms';
+    type TSocketEvent = 'get-rooms'  | 
+                        'add-room'   | 
+                        'rooms'      | 
+                        'join-room'  |
+                        'leave-room' |
+                        'make-move'  |
+                        'game-stat'  ;
+
+    enum EGameStatus {
+        LOSS = 0,
+        DRAW,
+        WIN
+    }
 }
+
