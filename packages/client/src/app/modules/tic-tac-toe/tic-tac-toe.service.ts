@@ -24,6 +24,14 @@ export class TicTacToeService {
     this.socket = io(SOCKET_END_POINT).connect();
   }
 
+  public joinRoom( roomId: string ) {
+    this.socket.emit('join-room', roomId);
+  }
+
+  public leaveRoom( roomId: string ) {
+    this.socket.emit('leave-room', roomId);
+  }
+
   public addRoom(roomName: string ) {
     this.socket.emit('add-room', roomName);
   }
