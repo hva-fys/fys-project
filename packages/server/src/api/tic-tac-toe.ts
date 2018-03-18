@@ -156,9 +156,9 @@ export class TicTacToe {
     private updateRoomsJoinability() {
         const rooms = [... this.rooms$.value]
         for (const [roomId, value] of this.roomsState.entries()) {
-            if ( value.length === 2 ) {
+            const roomIndex = rooms.findIndex(room => room.id === roomId);
+            if ( ~ roomIndex  && value.length === 2 ) {
                 console.log(`[updateRoomsJoinability] ${roomId} is going to be locked`);
-                const roomIndex = rooms.findIndex(room => room.id === roomId);
                 rooms[roomIndex].joinable = false;
                 this.rooms$.next(rooms);
             } else if (value.length < 2 ) {
