@@ -1,5 +1,8 @@
 require('ts-node/register');
 
-const Main = require('./src/index').Main;
+const Environment = require('./src/environment').Environment;
 
-const main = new Main();
+const env = new Environment();
+if(env) {
+  env.run();
+}
