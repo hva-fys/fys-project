@@ -1,5 +1,5 @@
 import * as express from 'express';
-import * as socketio from 'socket.io';
+import * as SocketIO from 'socket.io';
 import * as fys from '../../../shared/fys-types';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
@@ -89,7 +89,7 @@ export class TicTacToe {
                     return !alreadyJoined;
                 })
                 .subscribe( roomId => {
-                    socket.join(roomId, err => {
+                    socket.join(roomId, (err: any) => {
                         if ( err ) {
                             throw new Error('error joining room' + roomId);
                         }
@@ -120,14 +120,15 @@ export class TicTacToe {
        * we want our combinations arrays to always be sorted properly
        * We will do this in a copy to ensure we respect the original objects immutability
        * */
-        let sortedCombinations = { ...this.gameState.get(roomId) };
+        // let sortedCombinations = { ...this.gameState.get(roomId) };
+        let sortedCombinations = { ...[] };
 
         for (let key in sortedCombinations) {
             sortedCombinations[key].sort();
 
             const winner = this.possibleWins.some(possibleWin => {
                 let correctPositions = sortedCombinations[key]
-                    .map(combo => ~ possibleWin.find( possibleWinCombos => possibleWinCombos === combo ) )
+                    .map( (combo: any) => ~ possibleWin.find( possibleWinCombos => possibleWinCombos === combo ) )
                     .filter(Boolean);
 
                 /** If a player has 3 positions correct of the possible combinations they won! */
