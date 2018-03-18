@@ -6,7 +6,7 @@ import { share, map, take } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
 // environment.
-const SOCKET_END_POINT = `${environment.host}/tic-tac-toe`;
+const SOCKET_END_POINT = `${environment.END_POINT_URL}/tic-tac-toe`;
 
 interface TicTacToeServiceState {
   rooms$: Observable<fys.TicTacToe.IRoom[]>;
