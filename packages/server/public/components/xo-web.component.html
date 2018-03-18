@@ -1,0 +1,327 @@
+<template>
+  <style>
+    @keyframes flash {
+      from {
+        background-color: black;
+      }
+      to {
+        background-color: white;
+      }
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      height: 100%;
+    }
+
+    button {
+      width: 100%;
+      background-color: white;
+      text-align: center;
+      border-color: black;
+      font-size: 28px;
+    }
+
+    button.flash {
+      animation: flash .4s;
+      animation-iteration-count: 2;
+    }
+
+    button:focus {
+      outline: none;
+    }
+  </style>
+
+  <div class="container">
+    <button></button>
+    <button></button>
+    <button></button>
+    <button></button>
+    <button></button>
+    <button></button>
+    <button></button>
+    <button></button>
+    <button></button>
+  </div>
+</template>
+
+<script>
+  //@ts-check
+
+  const thisDoc = document.currentScript.ownerDocument;
+
+  const template = thisDoc.querySelector('template').content;
+
+  class TicTacToe extends HTMLElement {
+
+    constructor() {
+      super();
+
+      this.possibleWins = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+      ];
+
+      this.computerOn = false;
+
+      this.players = {
+        x: [],
+        o: []
+      }
+
+      /** Whos turn it is, 1 will be x and 0 will be 0 */
+      this.xTurn = true;
+
+      /** Amount of moves that have been made so far */
+      this.movesMade = 0;
+
+      this.MOVES_COUNT = 9;
+    }
+
+    static get observedAttributes() { return ['computer-on']; }
+
+    connectedCallback() {
+      const shadowRoot = this.attachShadow({ mode: 'open' });
+      const clone = document.importNode(template, true);
+      shadowRoot.appendChild(clone);
+
+      console.log(this.attributes);
+
+      this.initGame();
+
+      this.attachButtonListeners();
+    }
+
+
+    disconnectedCallback() { }
+
+    attributeChangedCallback(attrName, oldVal, newVal) {
+      if (attrName === 'computer-on') {
+        this.computerOn = !(newVal === null)
+      }
+    }
+    /** Callback whenever a custom element has been moved into a new document */
+
+    adoptedCallback() { }
+
+    initGame() {
+      this.players = {
+        x: [],
+        o: []
+      }
+
+      this.xTurn = true;
+
+      this.shadowRoot.querySelectorAll('button').forEach(button => {
+        button.innerHTML = '';
+        button.removeAttribute('disabled');
+      });
+    }
+
+    attachButtonListeners() {
+      this.shadowRoot.querySelectorAll('button').forEach((button, index) => {
+        button.addEventListener('click', () => this.makeMove({ button, index }));
+      });
+    }
+
+    /**
+     * Gets a button element by its index
+     * @param index {number}
+     * @return {HTMLButtonElement}
+    */
+    getButtonByIndex(index) {
+      return this.shadowRoot.querySelectorAll('button')[index];
+    }
+
+    /**
+     * We will call this whenever we want to make a move
+     * */
+    makeMove({ button, index }) {
+
+      if (!button) {
+        button = this.getButtonByIndex(index);
+      }
+
+      button.innerHTML = this.getTurnSign();
+
+      // Disabling this button so it cant be pressed in the future
+      //
+      button.setAttribute('disabled', '');
+
+      // Updating the local data we maintain to determine the winner
+      //
+
+      this.registerMove(index);
+
+      this.determineWin();
+
+      this.xTurn = !this.xTurn;
+
+      if (this.computerOn && this.xTurn === false) {
+        this.makeComputerMove();
+      }
+    }
+
+    getTurnSign() {
+      return this.xTurn ? '❌' : 'O';
+    }
+
+    /**
+     * Fills the players array with the proper combination
+     * @param location {number} a number between 1 - 9
+    */
+    registerMove(location) {
+      if (this.xTurn) {
+        this.players.x.push(location);
+      } else {
+        this.players.o.push(location);
+      }
+    }
+
+    /**
+     * We will call this whenever the game status changes
+     * So incase someone wins, or theres a draw
+    */
+    gameStatusChange(detail) {
+      setTimeout(() => this.dispatchEvent(new CustomEvent('game-status', { detail })));
+    }
+
+    /**
+     * Checks whether someone has won or not
+     */
+    determineWin() {
+      /** To determine wins,
+       * we want our combinations arrays to always be sorted properly
+       * We will do this in a copy to ensure we respect the original objects immutability
+       * */
+      let sortedCombinations = { ...this.players };
+
+      this.movesMade++;
+
+      for (let key in sortedCombinations) {
+        sortedCombinations[key].sort();
+
+        const winner = this.possibleWins.some(possibleWin => {
+          let correctPositions = sortedCombinations[key]
+            .map(combo => possibleWin.includes(combo))
+            .filter(Boolean);
+
+          /** If a player has 3 positions correct of the possible combinations they won! */
+          let positionMatch = correctPositions.length === 3;
+          if (positionMatch) {
+            this.highlightButtons(correctPositions);
+          }
+
+          return positionMatch;
+        });
+        if (winner) {
+          this.gameStatusChange({
+            win: true,
+            winner: key
+          });
+          break;
+        } else if (this.movesMade === this.MOVES_COUNT) {
+          this.gameStatusChange({
+            win: false
+          });
+          break;
+        }
+      }
+    }
+
+    /** This method is only interesting if the game is in single player mode */
+    makeComputerMove() {
+      // First the computer needs to check whether they can make an offensive move or not
+      // by checking player x's current moves. If the computer finds move that can possible lead to a win
+      // it needs to block them
+      //
+      let humanPlayerMoves = { ...this.players }.x.sort();
+
+      const possibleMoves = this.getAvailableMoves(humanPlayerMoves);
+
+      console.log(humanPlayerMoves);
+
+      /** Contains the index of a possible winnable combination, we want to block this move */
+      const possibleWinnableCombinationIndex = this.possibleWins.findIndex(possibleWin => {
+        /** Will contain the elements that are correct for this possible win */
+        let correctPositions = humanPlayerMoves.map(combo => possibleWin.includes(combo)).filter(Boolean);
+
+        /** If a user has two correct combinations for this winnable combination, we want to block it */
+        let possibleWinnableCombo = correctPositions.length === 2;
+
+        possibleWinnableCombo ? console.log('possible winnable combo', possibleWin) : null;
+
+        return possibleWinnableCombo;
+      });
+
+      // Means the humans has a combination of moves that is winnable, we want to block it
+      //
+      if (~possibleWinnableCombinationIndex) {
+        /** Contains the a */
+        const possibleWinnableCombination = this.possibleWins[possibleWinnableCombinationIndex];
+
+        /** This move will block the human from winning */
+        const blockingMove = possibleMoves.filter(possibleMove => {
+          return possibleWinnableCombination.includes(possibleMove);
+        })[0];
+
+        console.log('block move is', blockingMove);
+
+        this.makeMove({ index: blockingMove, button: null });
+        return;
+      }
+
+
+      // If the code reaches this point, it means the computer is certain that player x cannot make a winning move
+      // thus the computer can make an offensive move
+      //
+
+
+
+      const randomPossibleMoveIndex = Math.floor(Math.random() * possibleMoves.length);
+
+      console.log('making random move', randomPossibleMoveIndex);
+      this.makeMove({ index: randomPossibleMoveIndex, button: null });
+    }
+
+
+    /**
+     * Takes an array of existing moves and returns the available
+     * @param existingMoves {number[]}
+     * @return {number[]}
+     * */
+    getAvailableMoves(existingMoves) {
+      const availableMoves = Array(this.MOVES_COUNT).fill(null)
+        .map((x, index) => index)
+        .filter(possibleMove => {
+          let availableMove = !existingMoves.includes(possibleMove);
+
+          return availableMove;
+        });
+
+      return availableMoves;
+    }
+
+    /**
+     * Highlights buttons by adding a css class on them
+     * @param buttonIndexes {number[]}
+    */
+    highlightButtons(buttonIndexes) {
+      Array.from(this.shadowRoot.querySelectorAll('button'))
+        .filter((x, index) => buttonIndexes.includes(index))
+        .forEach(button => {
+          button.classList.add('flash');
+        })
+    }
+  }
+
+  window.customElements.define('tic-tac-toe', TicTacToe);
+</script>
