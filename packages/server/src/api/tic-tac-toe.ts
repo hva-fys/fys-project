@@ -26,8 +26,11 @@ export class TicTacToe {
         { name: 'room 1', created_on: new Date().toISOString(), id: guid(), joinable: true }
     ]);
 
-    constructor() {
-        this.setupSocket();
+    constructor(socket: SocketIO.Server) {
+
+        this.socket = socket.of('/tic-tac-toe');
+
+        this.setupListeners();
 
         this.possibleWins = [
             [0, 1, 2],
@@ -41,14 +44,7 @@ export class TicTacToe {
         ];
     }
 
-    private setupSocket(): void {
-        const app = express();
-        
-        const http = new Http.Server(app);
-        
-        this.socket = socketio(http).of('/tic-tac-toe');
-        
-        http.listen(3000, '0.0.0.0', () => console.log('listening on *:3000'));
+    private setupListeners(): void {
 
         this.socket.on('connect', socket => {
             this.on<string>(socket, 'add-room')
