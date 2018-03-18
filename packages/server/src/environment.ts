@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv-safe';
-import * as sequelize from 'sequelize';
+import {Sequelize} from 'sequelize-typescript';
 import * as express from 'express';
 import * as http from 'http';
 import * as bodyParser from 'body-parser';
@@ -38,6 +38,11 @@ export class Environment {
     private _http: http.Server;
 
     /**
+     * Sequelize instance.
+     */
+    private _sequelize: Sequelize;
+
+    /**
      * Environment constructor.
      *
      * @constructor
@@ -66,6 +71,35 @@ export class Environment {
             SERVER_HOST,
             SERVER_PORT,
         } = process.env;
+
+        const sequelize = await new Sequelize({
+            database: SEQUALIZE_NAME,
+            dialect: SEQUALIZE_DIALECT,
+            username: SEQUALIZE_USER,
+            password: SEQUALIZE_PASSWORD,
+            modelPaths: [
+                __dirname + '/model'
+            ],
+            operatorsAliases: false,
+        });
+
+        await sequelize.authenticate().then(() => {
+            console.log('Loading sequelize completed.');
+
+            if (SEQUALIZE_SYNC) {
+                sequelize.sync({force: true}).then(() => {
+                    console.log('Loading model sync completed.');
+                }).catch(e => {
+                    console.error('Error model sync', e);
+                    process.exit(1);
+                });
+            }
+
+            this._sequelize = sequelize;
+        }).catch(e => {
+            console.error('Error sequelize', e.message);
+            process.exit(1);
+        });
 
         const app = await express();
         if (app) {
@@ -104,6 +138,7 @@ export class Environment {
             }
             catch (e) {
                 console.error('Error route', e.message);
+                process.exit(1);
             }
 
             this._app = app;
