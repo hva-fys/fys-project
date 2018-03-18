@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "build": "(cd ../client/ && npm run build) && npm run copy_public",
-    "copy_public": "cp -r ../client/dist ./public"
+    "build": "(cd ../client/ && npm run build) && npm run copy_public && npm run commit_build",
+    "copy_public": "cp -r ../client/dist ./public",
+    "commit_build": "git add ./public/ && git commit -m 'chore(build): updates public folder' "
   },
   "author": {
     "name": "Abdalla Elmedny",
