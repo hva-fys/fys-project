@@ -4,7 +4,9 @@
   "description": "Starter project for nodejs projects with typescript",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "build": "(cd ../client/ && npm run build) && npm run copy_public",
+    "copy_public": "cp -r ../client/dist ./public"
   },
   "author": {
     "name": "Abdalla Elmedny",
