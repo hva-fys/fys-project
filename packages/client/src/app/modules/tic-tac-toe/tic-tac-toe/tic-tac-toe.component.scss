@@ -1,0 +1,32 @@
+:host {
+  display: block;
+}
+
+@keyframes flash {
+    from { background-color: black; }
+    to { background-color: white; }
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100%;
+}
+
+button {
+    width: 100%;
+    background-color: white;
+    text-align: center;
+    border-color: black;
+    font-size: 28px;
+}
+
+button.flash {
+    animation: flash .4s;
+    animation-iteration-count: 2;
+}
+
+button:focus {
+    outline: none;
+}
