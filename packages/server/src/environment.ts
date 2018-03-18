@@ -150,19 +150,19 @@ export class Environment {
 
             console.log('Loading express completed.');
         }
+        
+        const httpInstance = new http.Server(this._app);
 
-        const socket = socketio(http);
+        const socket = socketio(httpInstance);
 
         new TicTacToe(socket);
         
-        const pHttp = new http.Server(this._app);
-        
-        if (pHttp) {
-            pHttp.listen(parseInt(SERVER_PORT) || 8080, SERVER_HOST || '0.0.0.0', () => {
+        if (httpInstance) {
+            httpInstance.listen(parseInt(SERVER_PORT) || 8080, SERVER_HOST || '0.0.0.0', () => {
                 console.log(`Listening on ${SERVER_HOST}:${SERVER_PORT}`);
             });
 
-            this._http = pHttp;
+            this._http = httpInstance;
         }
     }
 }
