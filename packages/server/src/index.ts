@@ -1,10 +1,13 @@
-import { TicTacToe } from './api/tic-tac-toe';
+import { Bar } from './api/bar';
 
 export class Main {
-
-    private ticTacToe: TicTacToe;
+    private _bar: Bar;
 
     constructor(){
-        this.ticTacToe = new TicTacToe();
+        console.log("Main constructed");
+        
+        this._bar = new Bar();
+        this._bar.log("Baz");
+            
     }
 }
