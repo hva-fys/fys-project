@@ -10,6 +10,9 @@ const SOCKET_END_POINT = `${environment.END_POINT_URL}/tic-tac-toe`;
 
 interface TicTacToeServiceState {
   rooms$: Observable<fys.TicTacToe.IRoom[]>;
+  gameStatus$: Observable<fys.TicTacToe.IGameState>;
+  endGame$: Observable<fys.TicTacToe.IEndGame>;
+  restartGame$: Observable<void>;
 }
 
 @Injectable()
@@ -19,7 +22,10 @@ export class TicTacToeService {
   private socket: SocketIOClient.Socket;
 
   public state: TicTacToeServiceState = {
-    rooms$: new Observable()
+    rooms$: new Observable(),
+    gameStatus$: new Observable(),
+    endGame$: new Observable(),
+    restartGame$: new Observable()
   };
 
   constructor() {
@@ -28,11 +34,21 @@ export class TicTacToeService {
   }
 
   public makeMove( moveIndex: number ) {
-
+    this.socket.emit('make-move', moveIndex);
   }
 
-  public joinRoom( roomId: string ) {
+  public joinRoom( roomId: string ): Observable<fys.TicTacToe.TRole> {
     this.socket.emit('join-room', roomId);
+
+    this.state.gameStatus$ = this.on<fys.TicTacToe.IGameState>('game-stat');
+
+    this.state.endGame$ = this.on<fys.TicTacToe.IEndGame>('end-game');
+
+    this.state.restartGame$ = this.on<void>('restart-game');
+
+    const stream$ = this.on<fys.TicTacToe.TRole>('start-game');
+
+    return stream$;
   }
 
   public leaveRoom( roomId: string ) {
@@ -50,7 +66,7 @@ export class TicTacToeService {
   }
 
   /** Turns a socket.io callback into an rxjs stream */
-  private on<T>(event: string): Observable<T> {
+  private on<T>(event: fys.TicTacToe.TSocketEvent): Observable<T> {
 
     const observable = new Observable<T>(observer => {
         const listener = (data) => {

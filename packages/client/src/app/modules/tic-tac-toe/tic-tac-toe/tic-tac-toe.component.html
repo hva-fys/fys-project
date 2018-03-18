@@ -1,3 +1,17 @@
-<div class="container">
-  <button *ngFor="let buttonIndex of buttons" (click)="buttonPress(buttonIndex)"></button>
-</div>
+<header class="top">
+  <div> You're player <b>{{ role$ | async }}</b> </div>
+
+  <div class="score"> Score: <b>{{ score$ | async }}</b> </div>
+</header>
+
+<ng-container *ngIf="true">
+  <div class="container">
+    <button *ngFor="let button of buttons; let index = index" (click)="buttonPress(index)" [disabled]="button.disabled">
+      {{ button.text }}
+    </button>
+  </div>
+</ng-container>
+<ng-container *ngIf="loading$ | async">
+  <mat-spinner @fadeInOut></mat-spinner>
+  <div @fadeInOut class="overlay"></div>
+</ng-container>
