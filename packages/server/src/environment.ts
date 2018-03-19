@@ -6,6 +6,7 @@ import * as bodyParser from 'body-parser';
 import * as socketio from "socket.io";
 import * as _ from 'lodash';
 import * as fs from 'fs';
+import * as path from 'path';
 import { TicTacToe } from './api/tic-tac-toe';
 
 /**
@@ -112,6 +113,10 @@ export class Environment {
             }));
 
             app.use('/', express.static('public'));
+     
+            app.get('/*', (req, res) => {
+                res.sendFile(path.resolve('public/index.html'));
+            });
 
             try {
                 const paths = fs.readdir(__dirname + '/route', (err, files) => {
