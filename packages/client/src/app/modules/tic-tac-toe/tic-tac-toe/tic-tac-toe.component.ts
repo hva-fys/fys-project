@@ -94,6 +94,8 @@ export class TicTacToeComponent implements OnInit, OnDestroy {
 
   buttonPress(index: number) {
     this.ticTacToeService.makeMove(index);
+
+    this.buttons[index].disabled = true;
   }
 
   ngOnDestroy() {
