@@ -1,5 +1,7 @@
 :host {
   display: block;
+  position: relative;
+  height: calc(100vh - 75px);
 }
 
 @keyframes flash {
@@ -7,11 +9,24 @@
     to { background-color: white; }
 }
 
+header.top {
+  height: 10%;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 0px 16px;
+  box-sizing: border-box;
+
+  .score {
+    margin-left: auto;
+  }
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    height: 100%;
+    height: 90%;
 }
 
 button {
@@ -29,4 +44,21 @@ button.flash {
 
 button:focus {
     outline: none;
+}
+
+mat-spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+}
+
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background-color: rgba(0,0,0,0.18)
 }

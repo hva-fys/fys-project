@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   { path: '', component: RoomsComponent },
@@ -34,6 +34,7 @@ export const RoutingConfig: ModuleWithProviders = RouterModule.forChild(routes);
     MatListModule,
     MatDividerModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     FormsModule
   ],
   declarations: [TicTacToeComponent, RoomsComponent],

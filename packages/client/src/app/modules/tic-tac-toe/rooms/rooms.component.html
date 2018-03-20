@@ -10,7 +10,7 @@
         <p mat-line>
            {{room.name}}
         </p>
-        <button mat-button color="primary" [routerLink]="['./game/' + room.id ]">Join</button>
+        <button mat-button color="primary" [disabled]="!room.joinable" [routerLink]="['./game/' + room.id ]">Join</button>
       </mat-list-item>
       <mat-divider *ngIf="!last"></mat-divider>
     </ng-container>
