@@ -4,6 +4,10 @@ stages:
 
 build:
   stage: build
+  variables:
+    GIT_STRATEGY: none
+  before_script:
+    - git clone git@gitlab.fdmci.hva.nl:ID1S1-fys/fasten-your-seat-belts.git
   script:
     - cd packages/client
     - npm install
