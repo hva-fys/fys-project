@@ -1,3 +1,37 @@
-<p>
-  product-list works!
-</p>
+<div class="filters">
+  <h1>Filters</h1>
+  <mat-divider></mat-divider>
+  <h3>
+    Price
+  </h3>
+
+  <div class="prices-group">
+    <mat-form-field>
+      <mat-select placeholder="Start price">
+        <mat-option *ngFor="let price of prices" [value]="price">
+          {{ price }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <mat-select placeholder="End price">
+        <mat-option *ngFor="let price of prices" [value]="price">
+          {{ price }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+
+<div class="products-container">
+  <mat-card @fadeInOut *ngFor="let product of products">
+    <mat-card-title>{{ product.name }}</mat-card-title>
+    <img mat-card-image [src]="product.imageUrl" alt="Product photo of a {{ product.title }}">
+    <mat-card-content>
+      € {{ product.price }}
+    </mat-card-content>
+  </mat-card>
+</div>

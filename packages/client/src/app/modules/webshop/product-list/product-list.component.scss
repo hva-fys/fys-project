@@ -1,0 +1,51 @@
+:host {
+  padding: 8px;
+  display: flex;
+}
+
+.filters {
+  $padding: 8px 16px;
+  width: 20vw;
+  height: 50vh;
+  position: sticky;
+  top: 16px;
+  background-color: whitesmoke;
+  h1, h3 {
+    margin: 0;
+    padding: $padding;
+  }
+
+
+  .prices-group {
+    padding: 0px 16px;
+    display: flex;
+    flex-wrap: nowrap;
+    mat-form-field {
+      width: calc(50% - 8px);
+      margin-right: 8px;
+    }
+  }
+}
+
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 75vw;
+  margin-left: auto;
+}
+
+mat-card {
+  width: 250px;
+  margin: 8px;
+  mat-card-content {
+    font-family: Roboto Mono;
+    font-size: 22px;
+    text-align: right;
+  }
+
+  img[mat-card-image] {
+    height: 250px;
+    object-fit: contain;
+  }
+}
