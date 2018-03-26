@@ -23,7 +23,8 @@
     "@types/lodash": "^4.14.105",
     "@types/socket.io": "^1.4.31",
     "forever": "^0.15.3",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "semantic-release": "^15.1.4"
   },
   "dependencies": {
     "lodash": "^4.17.5",
