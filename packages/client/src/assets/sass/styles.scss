@@ -1,13 +1,11 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-/* You can add global styles to this file, and also import other style files */
  @font-face {
     font-family: 'SlatePro';
     font-style: normal;
-    src: url(https://css.s-hawaiianairlines.com/Content/assets/fonts/SlatePro/3354DA_1_0.woff2) format('woff2');
+    src: url('../font/slate_pro.woff2') format('woff2');
 }
 
-/* fallback */
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -15,6 +13,10 @@
   src: url('../font/material-icons.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('../font/roboto_mono.woff2') format('woff2');
+}
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
