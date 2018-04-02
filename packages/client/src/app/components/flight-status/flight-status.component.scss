@@ -1,0 +1,27 @@
+:host {
+  width: 300px;
+  color: white;
+  display: flex;
+}
+
+.line-container {
+  position: relative;
+  width: 250px;
+  display: inherit;
+}
+
+mat-icon {
+  transform: rotate(90deg);
+  color: white;
+  position: absolute;
+  left: 0;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.line {
+  width: 100%;
+  height: 5px;
+  border: 0.5px solid whitesmoke;
+  background-color: transparent;
+  align-self: center;
+}

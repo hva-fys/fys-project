@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FlightStatusService } from '../../services/flight-status.service';
 
 @Component({
   selector: 'fys-flight-status',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FlightStatusComponent implements OnInit {
 
-  constructor() { }
+  public progress$ = this.flightStatusService.progress$;
+  public from = 'AMS';
+  public to = 'CAI';
 
-  ngOnInit() {
-  }
+  constructor(private flightStatusService: FlightStatusService) { }
+
+  ngOnInit() {}
 
 }
