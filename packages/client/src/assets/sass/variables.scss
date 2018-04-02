@@ -1,0 +1,13 @@
+$colors: (
+  primary:     rgba(238, 69, 61, 1),
+  secondary:   rgba(197, 23, 136, 1),
+  purple-dark: rgba(90, 16, 93, 1),
+  purple-light: rgba(70, 60, 143, 1)
+);
+
+:root {
+    --primary: map-get($colors, primary);
+    --secondary: map-get($colors, secondary);
+    --purple-dark: map-get($colors, purple-dark);
+    --purple-light: map-get($colors, purple-light);
+}
