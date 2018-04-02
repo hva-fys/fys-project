@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FlightStatusService } from '../../services/flight-status.service';
-import { setInterval } from 'timers';
 
 @Component({
   selector: 'fys-flight-status',
