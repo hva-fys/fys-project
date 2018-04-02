@@ -17,6 +17,8 @@ interface IProduct {
 export class ProductListComponent implements OnInit {
 
 
+  public category = 'Watches';
+
   public products: IProduct[] = [
     {
       name: 'Apple watch',

@@ -1,37 +1,25 @@
-<div class="filters">
-  <h1>Filters</h1>
-  <mat-divider></mat-divider>
-  <h3>
-    Price
-  </h3>
+<div class="top-card">
+  {{ category }}
+</div>
 
-  <div class="prices-group">
-    <mat-form-field>
-      <mat-select placeholder="Start price">
-        <mat-option *ngFor="let price of prices" [value]="price">
-          {{ price }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-
-    <mat-form-field>
-      <mat-select placeholder="End price">
-        <mat-option *ngFor="let price of prices" [value]="price">
-          {{ price }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+<main class="row no-gutters p-3">
+  <div class="filters col-12 col-md-3">
+    <h3>
+      Price
+    </h3>
+    <div>
+      <!-- <mat-slider></mat-slider> -->
+    </div>
   </div>
-</div>
 
 
-<div class="products-container">
-  <mat-card @fadeInOut *ngFor="let product of products">
-    <mat-card-title>{{ product.name }}</mat-card-title>
-    <img mat-card-image [src]="product.imageUrl" alt="Product photo of a {{ product.title }}">
-    <mat-card-content>
-      € {{ product.price }}
-    </mat-card-content>
-  </mat-card>
-</div>
+  <div class="d-flex justify-content-center col-12 col-md-9 flex-wrap">
+    <mat-card @fadeInOut *ngFor="let product of products" routerLink="product">
+      <mat-card-title>{{ product.name }}</mat-card-title>
+      <img mat-card-image [src]="product.imageUrl" alt="Product photo of a {{ product.title }}">
+      <mat-card-content>
+        € {{ product.price }}
+      </mat-card-content>
+    </mat-card>
+  </div>
+</main>
