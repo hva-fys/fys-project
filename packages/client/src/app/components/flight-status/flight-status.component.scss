@@ -4,10 +4,17 @@
   display: flex;
 }
 
-.line-container {
+.middle-container {
   position: relative;
   width: 250px;
   display: inherit;
+  overflow: hidden;
+}
+
+section {
+  width: 100%;
+  display: inherit;
+  position: inherit;
 }
 
 mat-icon {

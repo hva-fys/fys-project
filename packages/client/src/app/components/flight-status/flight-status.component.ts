@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FlightStatusService } from '../../services/flight-status.service';
+import { setInterval } from 'timers';
 
 @Component({
   selector: 'fys-flight-status',
   templateUrl: './flight-status.component.html',
-  styleUrls: ['./flight-status.component.scss']
+  styleUrls: ['./flight-status.component.scss'],
 })
 export class FlightStatusComponent implements OnInit {
 
@@ -12,8 +13,15 @@ export class FlightStatusComponent implements OnInit {
   public from = 'AMS';
   public to = 'CAI';
 
+  /** What to show to the user right now */
+  public showETA = false;
+
   constructor(private flightStatusService: FlightStatusService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    setInterval(() => {
+      this.showETA = !this.showETA;
+    }, 3000);
+  }
 
 }
