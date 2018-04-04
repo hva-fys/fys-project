@@ -7,10 +7,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 const routes: Routes = [
-  { path: '', component: ProductListComponent }
+  { path: '', component: ProductListComponent, data: { state: 'plp' } },
+  { path: 'product', component: ProductDetailsComponent, data: { state: 'pdp' } }
 ];
 
 export const RoutingConfig: ModuleWithProviders = RouterModule.forChild(routes);
@@ -23,6 +25,7 @@ export const RoutingConfig: ModuleWithProviders = RouterModule.forChild(routes);
     MatDividerModule,
     MatButtonModule,
     MatSelectModule,
+    MatSliderModule,
     RoutingConfig
   ],
   declarations: [ProductListComponent, ProductDetailsComponent]
