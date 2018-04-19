@@ -7,7 +7,8 @@ export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'tic-tac-toe', loadChildren: 'app/modules/tic-tac-toe/tic-tac-toe.module#TicTacToeModule' },
   { path: 'webshop', loadChildren: 'app/modules/webshop/webshop.module#WebshopModule' },
-  { path: 'audio', loadChildren: 'app/modules/audio/audio.module#AudioModule' }
+  { path: 'audio', loadChildren: 'app/modules/audio/audio.module#AudioModule' },
+  { path: 'login', loadChildren: 'app/modules/login/login.module#LoginModule' }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

@@ -1,6 +1,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./variables";
 
- @font-face {
+@font-face {
     font-family: 'SlatePro';
     font-style: normal;
     src: url('../font/slate_pro.woff2') format('woff2');
@@ -41,4 +42,21 @@ body {
 
 button:focus {
   outline: none !important;
+}
+
+fys-root {
+
+  .bg-primary {
+    background-color: map-get($colors, primary) !important;
+  }
+  .bg-secondary {
+    background-color: map-get($colors, secondary);
+  }
+  .bg-purple-light {
+    background-color: map-get($colors, purple-light);
+  }
+  .bg-purple-dark {
+    background-color: map-get($colors, purple-dark);
+  }
+
 }

@@ -1,0 +1,42 @@
+<mat-card class="col-11 col-md-6 mx-1 mx-lg-0">
+  <div class="row no-gutters">
+    <div class="col-12 col-lg-8">
+      <header class="bg-purple-light">
+        <h3>Login</h3>
+      </header>
+      <main class="row no-gutters">
+        <form [formGroup]="form" class="d-block col-12 col-md-6">
+          <mat-form-field>
+            <mat-icon matSuffix>confirmation_number</mat-icon>
+            <input formControlName="ticketNumber" type="text" matInput placeholder="Ticket number" i18n-placeholder>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-icon matSuffix>vpn_key</mat-icon>
+            <input formControlName="accessCode" type="text" matInput placeholder="Access code" i18n-placeholder>
+          </mat-form-field>
+        </form>
+
+        <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
+          <button
+            mat-raised-button
+            color="secondary"
+            [disabled]="form.invalid"
+            (click)="login()">
+            Login
+          </button>
+        </div>
+
+      </main>
+    </div>
+    <div class="col-12 col-lg-4 mx-lg-0">
+      <header class="bg-primary">
+        <h3 i18n>As guest</h3>
+      </header>
+      <main>
+        <p>You will have access to the flight information system. But to use the internet you need to login</p>
+        <button mat-raised-button color="secondary" class="d-block mx-auto" (click)="loginAsGuest()">Proceed</button>
+      </main>
+    </div>
+  </div>
+</mat-card>

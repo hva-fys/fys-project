@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FlightStatusService } from './services/flight-status.service';
 import { FlightStatusComponent } from './components/flight-status/flight-status.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FlightStatusComponent } from './components/flight-status/flight-status.
     routing,
     BrowserAnimationsModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule
   ],
   providers: [FlightStatusService],
   bootstrap: [AppComponent],

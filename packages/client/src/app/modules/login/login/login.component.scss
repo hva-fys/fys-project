@@ -1,0 +1,29 @@
+@import './variables.scss';
+
+:host {
+  position: relative;
+  display: block;
+  height: calc(100vh - #{$header-height});
+}
+
+mat-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0;
+}
+
+
+mat-form-field {
+  display: block;
+}
+
+header {
+  padding: 16px 24px;
+  color: white;
+}
+
+main {
+  padding: 16px;
+}
