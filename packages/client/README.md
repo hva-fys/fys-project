@@ -16,6 +16,12 @@ If you want to generate a component for a specific modules run the following com
 ng generate component modules/{MODULE-NAME}/{COMPONENT-NAME} --m={MODULE-NAME}/{MODULE.NAME}.module.ts
 ```
 
+To generate a new feature module run the following command in the same location
+
+```bash
+ng g module modules/landing
+```
+
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
