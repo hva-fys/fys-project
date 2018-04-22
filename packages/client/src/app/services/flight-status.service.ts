@@ -11,6 +11,8 @@ export class FlightStatusService {
     setInterval(() => {
       if ( this.progress$.value < 100 ) {
         this.progress$.next( this.progress$.value + 10 );
+      } else {
+        this.progress$.next(0);
       }
     }, 1000);
   }
