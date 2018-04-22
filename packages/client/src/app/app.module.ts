@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlightStatusService } from './services/flight-status.service';
 import { FlightStatusComponent } from './components/flight-status/flight-status.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [FlightStatusService],
   bootstrap: [AppComponent],
