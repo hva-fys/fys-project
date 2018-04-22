@@ -13,7 +13,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 If you want to generate a component for a specific modules run the following command in the `packages/client` folder
 
 ```bash
-ng generate component modules/{MODULE-NAME}/{COMPONENT-NAME} --m={MODULE-NAME}/{MODULE.NAME}.module.ts
+ng generate component modules/{MODULE-NAME}/{COMPONENT-NAME} --m=modules/{MODULE-NAME}/{MODULE.NAME}.module.ts
 ```
 
 To generate a new feature module run the following command in the same location
