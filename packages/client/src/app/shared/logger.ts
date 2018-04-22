@@ -39,9 +39,9 @@ const createLogger = (prefix: string): Partial<Console> => {
  *
  *
  */
-export const Logger = (prefix?: string) => {
+export function Logger(prefix?: string) {
   return (target: any) => {
     const kebabCasedName = kebabClassName(target.prototype);
     target.prototype.logger = createLogger(prefix || `[${kebabCasedName}]`);
   };
-};
+}
