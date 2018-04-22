@@ -1,3 +1,53 @@
-<p>
-  payment works!
-</p>
+<div class="top-card">Payment</div>
+<mat-chip-list routerLink="checkout">
+  <mat-chip class="price"> € {{ total$ | async }} </mat-chip>
+</mat-chip-list>
+<main class="row justify-content-center p-3 mx-2 mx-md-5">
+  <mat-card class="col-12 col-md-4">
+    <mat-card-header>
+      <div mat-card-avatar></div>
+      <mat-card-title>Robert </mat-card-title>
+      <mat-card-subtitle>
+        We have prepared your payment
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="icon-item my-2 row no-gutters">
+        <div class="col-4 d-flex align-items-center justify-content-center">
+          <mat-icon>confirmation_number</mat-icon>
+        </div>
+        <div class="col-8">
+           <div>Confirmation number</div>
+            <div>25WR5</div>
+        </div>
+      </div>
+      <div class="icon-item my-2 row no-gutters">
+        <div class="col-4 d-flex align-items-center justify-content-center">
+          <mat-icon>local_shipping</mat-icon>
+        </div>
+        <div class="col-8">
+           <div>Address</div>
+            <div>1094AN 46F Amsterdam</div>
+        </div>
+      </div>
+      <div class="icon-item my-2 row no-gutters">
+        <div class="col-4 d-flex align-items-center justify-content-center">
+          <mat-icon>credit_card</mat-icon>
+        </div>
+        <div class="col-8">
+           <div>Credit card</div>
+           <div class="d-flex align-items-center">
+             <div>1148361012286592 ···</div>
+            <button mat-button color="primary" (click)="changeCreditCard()">Change</button>
+           </div>
+        </div>
+      </div>
+      <p class="my-2">
+        We will be automatically charging your credit card with a total amount of <b> € {{ total$ | async }} </b> if you want to use a different credit card, please contact an employee.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="pay()">Pay</button>
+    </mat-card-actions>
+  </mat-card>
+</main>

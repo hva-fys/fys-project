@@ -20,7 +20,8 @@ import { PaymentComponent } from './payment/payment.component';
 const routes: Routes = [
   { path: '', component: ProductListComponent, data: { state: 'plp' } },
   { path: 'product/:id', component: ProductDetailsComponent, data: { state: 'pdp' } },
-  { path: 'checkout', component: CheckoutComponent }
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'payment', component: PaymentComponent }
 ];
 
 export const RoutingConfig: ModuleWithProviders = RouterModule.forChild(routes);
