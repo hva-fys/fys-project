@@ -1,3 +1,13 @@
-<p>
-  audio-homepage works!
-</p>
+<div class="top-card">
+  Audio
+</div>
+
+<main class="d-flex justify-content-center col-8 flex-wrap">
+    <mat-card *ngFor="let track of tracks" class="mat-card ng-tns-c10-1">
+      <mat-card-title [attr.title]="track.name">{{ track.name }}</mat-card-title>
+
+      <audio controls>
+        <source src="{{ track.trackSrc }}" type="audio/ogg">
+      </audio>
+    </mat-card>
+</main>

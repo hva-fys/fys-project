@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ITracks, tracks} from '../tracks';
 
 @Component({
   selector: 'fys-audio-homepage',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class AudioHomepageComponent implements OnInit {
 
   constructor() { }
+
+  public tracks: ITracks[] = tracks;
 
   ngOnInit() {
   }

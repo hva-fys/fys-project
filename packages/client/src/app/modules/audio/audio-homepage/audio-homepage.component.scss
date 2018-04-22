@@ -1,0 +1,18 @@
+@import './variables.scss';
+
+.top-card {
+  width: 100vw;
+  height: 130px;
+  background-color: lighten(map-get($colors, purple-light), 10%);
+  line-height: 130px;
+  letter-spacing: 10px;
+  font-family: 'SlatePro', sans-serif;
+  font-size: x-large;
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+mat-card {
+  margin: 8px;
+}
