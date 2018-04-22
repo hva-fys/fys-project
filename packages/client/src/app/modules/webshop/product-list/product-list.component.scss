@@ -56,3 +56,9 @@ mat-card {
     object-fit: contain;
   }
 }
+
+mat-chip-list .price {
+  position: absolute;
+  right: 32px;
+  top: #{$header-height + 49px};
+}

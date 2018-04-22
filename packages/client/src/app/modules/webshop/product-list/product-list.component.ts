@@ -1,11 +1,14 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { fadeInOut } from '../../../animations';
-import { style, animate, AnimationBuilder, AnimationPlayer } from '@angular/animations';
 import { Logger, ILoggable } from '../../../shared/logger';
 import { IProduct, products } from '../products';
 import { MatSnackBar } from '@angular/material';
 import { take } from 'rxjs/operators/take';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { StateService } from '../state.service';
+import { map } from 'rxjs/operators/map';
+import { filter } from 'rxjs/operators/filter';
 
 
 @Logger()
@@ -27,7 +30,17 @@ export class ProductListComponent implements OnInit, ILoggable {
 
   public lastScrollPosition: number;
 
-  constructor(private _builder: AnimationBuilder, private toast: MatSnackBar, private router: Router, private route: ActivatedRoute) { }
+  public total$: Observable<number> = this.state$.cart$.pipe(
+    filter( cart => Boolean(cart)),
+    map(cart => cart.total)
+  );
+
+  constructor(
+    private toast: MatSnackBar,
+    private router: Router,
+    private route: ActivatedRoute,
+    private state$: StateService
+  ) { }
 
   @HostListener('window:scroll', ['$event'])
   onScroll(e: Event) {

@@ -9,7 +9,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { StateService } from './state.service';
 
 
 const routes: Routes = [
@@ -30,8 +32,10 @@ export const RoutingConfig: ModuleWithProviders = RouterModule.forChild(routes);
     MatSelectModule,
     MatSliderModule,
     MatSnackBarModule,
+    MatChipsModule,
     RoutingConfig
   ],
-  declarations: [ProductListComponent, ProductDetailsComponent, CheckoutComponent]
+  declarations: [ProductListComponent, ProductDetailsComponent, CheckoutComponent],
+  providers: [StateService]
 })
 export class WebshopModule { }
