@@ -67,6 +67,8 @@ export class ProductListComponent implements OnInit, ILoggable {
     toast.onAction().pipe( take(1) ).subscribe(() => {
       this.router.navigate(['./checkout'], { relativeTo: this.route });
     });
+
+    this.state$.addToCart(addedProduct);
   }
 
 }

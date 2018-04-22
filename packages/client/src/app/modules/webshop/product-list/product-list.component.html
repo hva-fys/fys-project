@@ -1,5 +1,5 @@
 <mat-chip-list>
-  <mat-chip class="price"> € {{ total$ | async }} </mat-chip>
+  <mat-chip routerLink="checkout" class="price"> € {{ total$ | async }} </mat-chip>
 </mat-chip-list>
 
 <div class="top-card">
@@ -18,7 +18,7 @@
 
 
   <!-- <div class="d-flex justify-content-center col-12 col-md-9 flex-wrap"> -->
-  <div class="d-flex justify-content-center col-8 flex-wrap">
+  <div class="d-flex justify-content-center col-12, col-md-8 flex-wrap">
     <mat-card @fadeInOut *ngFor="let product of products">
       <mat-card-title [attr.title]="product.name">{{ product.name }}</mat-card-title>
       <img mat-card-image [src]="product.imageUrl" alt="Product photo of a {{ product.title }}">
