@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv-safe';
-import { Sequelize } from 'sequelize-typescript';
+import {Sequelize} from 'sequelize-typescript';
 import * as express from 'express';
 import * as http from 'http';
 import * as bodyParser from 'body-parser';
@@ -7,7 +7,7 @@ import * as socketio from "socket.io";
 import * as _ from 'lodash';
 import * as fs from 'fs';
 import * as path from 'path';
-import { TicTacToe } from './api/tic-tac-toe';
+import {TicTacToe} from './api/tic-tac-toe';
 
 /**
  * Environment.
@@ -91,14 +91,14 @@ export class Environment {
             if (SEQUALIZE_SYNC) {
                 sequelize.sync({force: true}).then(() => {
                     console.log('Loading model sync completed.');
-                }).catch( (e: any) => {
+                }).catch((e: any) => {
                     console.error('Error model sync', e);
                     process.exit(1);
                 });
             }
 
             this._sequelize = sequelize;
-        }).catch( (e: any) => {
+        }).catch((e: any) => {
             console.error('Error sequelize', e.message);
             // process.exit(1);
         });
@@ -113,55 +113,49 @@ export class Environment {
             }));
 
             app.use('/', express.static('public'));
-     
-            app.get('/*', (req, res) => {
-                res.sendFile(path.resolve('public/index.html'));
+
+            const paths = fs.readdir(__dirname + '/route', (err, files) => {
+                if (err) {
+                    throw new Error('[environment] error reading route directory' + err);
+                }
+
+                if (!_.isEmpty(files)) {
+                    const routes: any = {};
+
+                    files.forEach(file => {
+                        if (_.endsWith(file, '.ts')) {
+                            const name = _.toString(file.substr(0, file.length - 3));
+
+                            const route = require(`${__dirname}/route/${file}`)(this);
+                            if (route) {
+                                app.use(`/${name}`, route);
+
+                                console.log(`Loading route '${name}' completed.`);
+
+                                routes[name] = route;
+                            }
+                        }
+                    });
+
+                    this._routes = routes;
+                }
             });
 
-            try {
-                const paths = fs.readdir(__dirname + '/route', (err, files) => {
-                    if ( err ) {
-                        throw new Error('[environment] error reading route directory' + err);
-                    }
-
-                    if (!_.isEmpty(files)) {
-                        const routes: any = {};
-
-                        files.forEach( file => {
-                            if (_.endsWith(file, '.ts')) {
-                                const name = _.toString(file.substr(0, file.length - 3));
-
-                                const route = require(`${__dirname}/route/${file}`)(this);
-                                if (route) {
-                                    app.use(`/${name}`, route);
-
-                                    console.log(`Loading route '${name}' completed.`);
-
-                                    routes[name] = route;
-                                }
-                            }
-                        });
-
-                        this._routes = routes;
-                    }
-                })
-            }
-            catch (e) {
-                console.error('Error route', e.message);
-                process.exit(1);
-            }
+            app.get('*', (req, res) => {
+                res.sendFile(path.resolve('public/index.html'));
+            });
 
             this._app = app;
 
             console.log('Loading express completed.');
         }
-        
-        const httpInstance = new http.Server(this._app);
+
+        const httpInstance = await new http.Server(this._app);
 
         const socket = socketio(httpInstance);
 
         new TicTacToe(socket);
-        
+
         if (httpInstance) {
             httpInstance.listen(parseInt(SERVER_PORT) || 8080, SERVER_HOST || '0.0.0.0', () => {
                 console.log(`Listening on ${SERVER_HOST}:${SERVER_PORT}`);
