@@ -18,7 +18,7 @@ export class LandingComponent implements OnInit {
     { title: 'Taxfree Shop', icon: 'shop', description: this.loremText(), route: 'webshop'},
     { title: 'Gaming', icon: 'videogame_asset', description: this.loremText(), route: 'tic-tac-toe'},
     { title: 'Flight info', icon: 'my_location', description: this.loremText()},
-    { title: 'Video', icon: 'video_library', description: `Entertain yourself with a monthly selection of videos`},
+    { title: 'Video', icon: 'video_library', description: `Entertain yourself with a monthly selection of videos`, route: 'video'},
     { title: 'Audio', icon: 'audiotrack', description: this.loremText(), route: 'audio' }
   ];
 
