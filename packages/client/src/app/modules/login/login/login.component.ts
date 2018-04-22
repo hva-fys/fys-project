@@ -23,6 +23,9 @@ export class LoginComponent implements OnInit, ILoggable {
 
   ngOnInit() { }
 
+  login(value) {
+    alert('Welcome Robert!');
+  }
 
   loginAsGuest() {
     this.logger.log('logging in as guest...');
