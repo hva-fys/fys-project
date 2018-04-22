@@ -8,11 +8,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { StateService } from './state.service';
 
 
 const routes: Routes = [
   { path: '', component: ProductListComponent, data: { state: 'plp' } },
-  { path: 'product', component: ProductDetailsComponent, data: { state: 'pdp' } }
+  { path: 'product/:id', component: ProductDetailsComponent, data: { state: 'pdp' } },
+  { path: 'checkout', component: CheckoutComponent }
 ];
 
 export const RoutingConfig: ModuleWithProviders = RouterModule.forChild(routes);
@@ -26,8 +31,11 @@ export const RoutingConfig: ModuleWithProviders = RouterModule.forChild(routes);
     MatButtonModule,
     MatSelectModule,
     MatSliderModule,
+    MatSnackBarModule,
+    MatChipsModule,
     RoutingConfig
   ],
-  declarations: [ProductListComponent, ProductDetailsComponent]
+  declarations: [ProductListComponent, ProductDetailsComponent, CheckoutComponent],
+  providers: [StateService]
 })
 export class WebshopModule { }
