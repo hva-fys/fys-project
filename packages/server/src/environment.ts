@@ -114,32 +114,28 @@ export class Environment {
 
             app.use('/', express.static('public'));
 
-            const paths = fs.readdir(__dirname + '/route', (err, files) => {
-                if (err) {
-                    throw new Error('[environment] error reading route directory' + err);
-                }
+            const files = fs.readdirSync(__dirname + '/route').map(f => path.join(__dirname + '/route', f));
+            if (!_.isEmpty(files)) {
+                const routes: any = {};
 
-                if (!_.isEmpty(files)) {
-                    const routes: any = {};
+                files.forEach(file => {
+                    if (_.endsWith(file, '.ts')) {
+                        const name = _.toString(file.substr(0, file.length - 3));
 
-                    files.forEach(file => {
-                        if (_.endsWith(file, '.ts')) {
-                            const name = _.toString(file.substr(0, file.length - 3));
+                        const route = require(file)(this);
+                        if (route) {
+                            app.use(`/${name}`, route);
 
-                            const route = require(`${__dirname}/route/${file}`)(this);
-                            if (route) {
-                                app.use(`/${name}`, route);
+                            console.log(`Loading route '${name}' completed.`);
 
-                                console.log(`Loading route '${name}' completed.`);
-
-                                routes[name] = route;
-                            }
+                            routes[name] = route;
                         }
-                    });
+                    }
+                });
 
-                    this._routes = routes;
-                }
-            });
+                this._routes = routes;
+            }
+
 
             app.get('*', (req, res) => {
                 res.sendFile(path.resolve('public/index.html'));
