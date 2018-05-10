@@ -20,15 +20,13 @@ export class Environment {
      * @type {any[]}
      * @private
      */
-    private _models: any = [];
+    private _models = [];
 
     /**
      * All express routes.
      *
-     * @type {any[]}
-     * @private
      */
-    private _routes: any = [];
+    private _routes: { [key: string]: any } = {};
 
     /**
      * Express instance.
@@ -115,29 +113,28 @@ export class Environment {
 
             app.use('/', express.static('public'));
 
-
             const files = fs.readdirSync(__dirname + '/route')
                 .map(fileName => path.join(__dirname + '/route', fileName));
 
-            if (!_.isEmpty(files)) {
-                const routes: any = {};
 
-                files
-                    .filter(file => _.endsWith(file, '.ts'))
-                    .forEach(file => {
+            const routes: { [key: string]: any } = {};
+
+            files.filter(file => _.endsWith(file, '.ts'))
+                .forEach(file => {
 
                     const name = last(file.substr(0, file.length - 3).split('/'));
 
                     const route = require(file)(this);
+
                     if (route) {
                         app.use(`/${name}`, route);
                         routes[name] = route;
                     }
-                
-                });
+            
+            });
 
-                this._routes = routes;
-            }
+            this._routes = routes;
+        
 
             app.get('*', (req, res) => {
                 res.sendFile(path.resolve('public/index.html'));
