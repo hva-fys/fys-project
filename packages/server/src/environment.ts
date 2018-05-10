@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import * as fs from 'fs';
 import * as path from 'path';
 import {TicTacToe} from './api/tic-tac-toe';
+import { last } from 'lodash';
 
 /**
  * Environment.
@@ -114,33 +115,34 @@ export class Environment {
 
             app.use('/', express.static('public'));
 
-            const files = fs.readdirSync(__dirname + '/route').map(f => path.join(__dirname + '/route', f));
+
+            const files = fs.readdirSync(__dirname + '/route')
+                .map(fileName => path.join(__dirname + '/route', fileName));
+
             if (!_.isEmpty(files)) {
                 const routes: any = {};
 
-                files.forEach(file => {
-                    if (_.endsWith(file, '.ts')) {
-                        const name = _.toString(file.substr(0, file.length - 3));
+                files
+                    .filter(file => _.endsWith(file, '.ts'))
+                    .forEach(file => {
 
-                        const route = require(file)(this);
-                        if (route) {
-                            app.use(`/${name}`, route);
+                    const name = last(file.substr(0, file.length - 3).split('/'));
 
-                            console.log(`Loading route '${name}' completed.`);
-
-                            routes[name] = route;
-                        }
+                    const route = require(file)(this);
+                    if (route) {
+                        app.use(`/${name}`, route);
+                        routes[name] = route;
                     }
+                
                 });
 
                 this._routes = routes;
             }
 
-
             app.get('*', (req, res) => {
                 res.sendFile(path.resolve('public/index.html'));
             });
-
+         
             this._app = app;
 
             console.log('Loading express completed.');
