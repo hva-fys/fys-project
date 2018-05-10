@@ -62,3 +62,9 @@ mat-chip-list .price {
   right: 32px;
   top: #{$header-height + 49px};
 }
+
+@media (max-width: 450px) {
+  mat-card {
+    width: 100%;
+  }
+}

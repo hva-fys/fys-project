@@ -7,8 +7,8 @@ export interface ITracks {
 export const tracks: ITracks[] = [
   {
     id: 1,
-    name: 'Track 1',
-    trackSrc: './assets/track/',
+    name: 'Never gonna give you up',
+    trackSrc: './assets/tracks/never_gunna_give_you_up.mp3',
   },
   {
     id: 2,

@@ -42,3 +42,9 @@
     justify-content: flex-end;
   }
 }
+
+@media (max-width: 450px) {
+  div.card {
+    width: 100% !important;
+  }
+}
