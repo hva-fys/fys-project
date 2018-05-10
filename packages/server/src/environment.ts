@@ -7,7 +7,7 @@ import * as socketio from "socket.io";
 import * as _ from 'lodash';
 import * as fs from 'fs';
 import * as path from 'path';
-import {TicTacToe} from './api/tic-tac-toe';
+import {TicTacToe} from './sockets/tic-tac-toe';
 import { last } from 'lodash';
 
 /**
