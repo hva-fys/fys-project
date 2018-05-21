@@ -74,4 +74,6 @@ export declare namespace FlightInformation {
         /** This should be saved locally so the user can re-fetch the flight */
         flightNumber: string;
     }
+
+    type TAirplane = 'a320' | '737300' | '737400' | '737800'
 }
