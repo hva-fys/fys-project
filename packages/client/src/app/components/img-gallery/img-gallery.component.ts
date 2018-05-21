@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { fadeInOut } from '../animations';
+import { fadeInOut } from '../../animations';
 
 @Component({
   selector: 'fys-img-gallery',
