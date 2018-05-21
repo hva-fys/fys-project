@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import {environment} from "../../environments/environment";
-import * as io from "socket.io-client";
-import {share} from "rxjs/operators";
-import * as fys from "../../../../shared/fys-types";
-import {Observable} from "rxjs/Observable";
+import {environment} from '../../environments/environment';
+import * as io from 'socket.io-client';
+import {share} from 'rxjs/operators';
+import * as fys from '../../../../shared/fys-types';
+import {Observable} from 'rxjs/Observable';
 
 const SOCKET_END_POINT = `${environment.END_POINT_URL}/flight-status`;
 
