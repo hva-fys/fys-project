@@ -1,12 +1,14 @@
 @import './variables.scss';
 
+$block-height: 450px;
+
 :host {
   display: block;
 }
 
 agm-map {
   display: block;
-  height: 50vh;
+  height: calc(100vh - #{($block-height * 2) + $header-height});
 }
 
 mwl-gauge {
@@ -89,7 +91,7 @@ mwl-gauge {
 }
 
 .block {
-  height: 450px;
+  height: $block-height;
   overflow: hidden;
   img {
     height: 100%;

@@ -3,14 +3,19 @@ import { style, animate, trigger, transition, query, stagger, keyframes } from '
 import { FlightStatusService } from '../../../services/flight-status.service';
 import { FlightInformation } from 'fys';
 import { WikipediaService } from '../../../services/wikipedia.service';
+import { Subject } from 'rxjs/Subject';
+import { tap } from 'rxjs/operators';
+import { Logger, ILoggable } from '../../../shared/logger';
 
+@Logger()
 @Component({
   selector: 'fys-flight-status',
   templateUrl: './flight-status.component.html',
   styleUrls: ['./flight-status.component.scss']
 })
+export class FlightStatusComponent implements OnInit, OnDestroy, ILoggable {
+  public logger: Partial<Console>;
 
-export class FlightStatusComponent implements OnInit, OnDestroy {
   lat = 53.78767124584938;
   lng = -0.9008782187499946;
 
@@ -30,7 +35,7 @@ export class FlightStatusComponent implements OnInit, OnDestroy {
     lng: 4.921875
   };
 
-  num = 0;
+  speed = 400;
 
   public images = {
     cc: ['./assets/images/locations/cc/1.jpg', './assets/images/locations/cc/2.jpg', './assets/images/locations/cc/3.jpg'],
@@ -39,7 +44,14 @@ export class FlightStatusComponent implements OnInit, OnDestroy {
 
   public airplanes: Map<FlightInformation.TAirplane, string> = new Map();
 
-  speedLabelFn: Function = () => `${this.num} km/h`;
+  public plane$ = this.$flightStatus.state.plane$.pipe(
+    // tap(plane => this.logger.log('plane change', plane))
+  );
+
+  private stop$ = new Subject<void>();
+
+  speedLabelFn: Function = () => `${this.speed} km/h`;
+
 
   constructor(private $flightStatus: FlightStatusService, private $wikipedia: WikipediaService) {
     this.airplanes.set('a320', './assets/images/airplanes/a320.jpg');
@@ -47,7 +59,7 @@ export class FlightStatusComponent implements OnInit, OnDestroy {
     this.airplanes.set('737400', './assets/images/airplanes/737400.jpg');
     this.airplanes.set('737800', './assets/images/airplanes/737800.jpg');
 
-    this.$wikipedia.getIntro('Cape Canaveral').subscribe();
+    this.$wikipedia.getIntro('Cape Canaveral').subscribe( val => this.logger.log(val));
   }
 
   ngOnInit() {

@@ -1,17 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
+import { URLSearchParams, Jsonp } from '@angular/http';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable()
 export class WikipediaService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private jsonp: Jsonp) { }
 
 
   getIntro(title: string) {
-    const url = 'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=' + title;
-    const stream$ = this.http.get(url)
-      .pipe( tap( res => console.log(res)) );
+
+    const search = new URLSearchParams();
+
+    search.set('action', 'opensearch');
+    search.set('search', title);
+    search.set('format', 'json');
+
+    const url = 'https://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK' + title;
+
+    const stream$ = this.jsonp.get(url, { search })
+      .pipe(
+        map((request) => request.json()[1])
+      );
+
+    stream$.subscribe({
+      next: console.log,
+      error: console.error
+    });
 
     return stream$;
   }

@@ -13,6 +13,7 @@ import { FlightStatusComponent } from './components/flight-status/flight-status.
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { WikipediaService } from './services/wikipedia.service';
+import { JsonpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { WikipediaService } from './services/wikipedia.service';
     MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JsonpModule
   ],
   providers: [FlightStatusService, WikipediaService],
   bootstrap: [AppComponent],
