@@ -6,18 +6,33 @@ import { LandingComponent } from './components/landing/landing.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { FlightStatusService } from './services/flight-status.service';
+import { FlightStatusComponent } from './components/flight-status/flight-status.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { WikipediaService } from './services/wikipedia.service';
+import { JsonpModule } from '@angular/http';
+
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
-    HeaderComponent
+    HeaderComponent,
+    FlightStatusComponent,
   ],
   imports: [
     BrowserModule,
     routing,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    JsonpModule
   ],
-  providers: [],
+  providers: [FlightStatusService, WikipediaService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

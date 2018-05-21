@@ -7,6 +7,9 @@
 
 .card {
   h2 {
+    span {
+      font-family: Slatepro;
+    }
     background-color: var(--purple-dark);
     margin:0;
     padding-top: 0;
@@ -37,22 +40,11 @@
     padding:8px 16px;
     display: flex;
     justify-content: flex-end;
-    a {
-     appearance: none;
-     height: 36px;
-     padding: 0px 16px;
-     color: black;
-     text-align: center;
-     text-decoration: none;
-     line-height: 36px;
-     transition: .3s;
-     &:hover {
-        background-color: rgba(0,0,0,.12);
-     }
-     a:visited, a:link {
-      text-decoration: none;
-      color: black;
-     }
-    }
+  }
+}
+
+@media (max-width: 450px) {
+  div.card {
+    width: 100% !important;
   }
 }

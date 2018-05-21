@@ -1,75 +1,16 @@
 <div class="container">
-
-  <div class="card">
+  <div class="card" *ngFor="let category of categories">
     <h2 class="title">
-      <span>Flight info</span>
-      <i class="material-icons">my_location</i>
+      <span>{{ category.title }}</span>
+      <i class="material-icons">{{ category.icon }}</i>
     </h2>
     <div class="content">
-      View basic flight information. Such as location, speed and altitude
+      {{ category.description }}
     </div>
-  </div>
-
-  <div class="card">
-    <h2 class="title">
-      <span>Video</span>
-      <i class="material-icons">video_library</i>
-    </h2>
-    <div class="content">
-      Entertain yourself with a monthly selection of videos
-    </div>
-  </div>
-
-  <div class="card">
-    <h2 class="title">
-      <span>Audio</span>
-      <i class="material-icons">audiotrack</i>
-    </h2>
-    <div class="content">
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi repellendus placeat, fugit voluptate molestias distinctio
-      at tenetur commodi veritatis tempora dolor beatae nostrum quasi, blanditiis non. Suscipit reprehenderit voluptas qui.
-    </div>
-  </div>
-
-  <div class="card">
-    <h2 class="title">
-      <span>Gaming</span>
-      <i class="material-icons">videogame_asset</i>
-    </h2>
-    <div class="content">
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae, pariatur. Nemo ducimus alias ab corporis minus molestias
-      sed magni earum, ut quam. Modi consequuntur tenetur fugit voluptatem animi deserunt qui.
-    </div>
-    <div class="action-buttons">
-      <a routerLink="tic-tac-toe">
+    <div class="action-buttons mt-auto" *ngIf="category.route">
+      <button mat-button [routerLink]="category.route">
         More
-      </a>
+      </button>
     </div>
   </div>
-  <div class="card">
-    <h2 class="title">
-      <span>Taxfree Shop</span>
-      <i class="material-icons">shop</i>
-    </h2>
-    <div class="content">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt officiis, asperiores, sequi saepe consequatur esse porro nemo
-      voluptate quasi voluptatum quibusdam nostrum repellendus assumenda distinctio fuga perferendis error ducimus quos!
-    </div>
-    <div class="action-buttons">
-      <a routerLink="webshop">
-        More
-      </a>
-    </div>
-  </div>
-  <div class="card">
-    <h2 class="title">
-      <span>Browser</span>
-      <i class="material-icons">language</i>
-    </h2>
-    <div class="content">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae saepe quaerat magni voluptatum quis officiis, optio
-      impedit architecto accusantium adipisci qui perferendis sequi blanditiis molestiae vero. Ea, ipsum quod. Doloribus.
-    </div>
-  </div>
-
 </div>

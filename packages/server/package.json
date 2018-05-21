@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "build": "(cd ../client/ && npm run build) && npm run copy_public && npm run commit_build",
+    "build": "(cd ../client/ && npm run build) && npm run copy_public",
     "copy_public": "rm -rf public && cp -r ../client/dist ./public",
-    "commit_build": "git add ./public/ && git commit -m 'chore(build): updates public folder' ",
     "start-background": "forever start index.js",
-    "stop-background": "forever stop index.js"
+    "stop-background": "forever stop index.js",
+    "semantic-release": "semantic-release"
   },
   "author": {
     "name": "Abdalla Elmedny",
@@ -23,7 +23,8 @@
     "@types/lodash": "^4.14.105",
     "@types/socket.io": "^1.4.31",
     "forever": "^0.15.3",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "semantic-release": "^15.1.4"
   },
   "dependencies": {
     "lodash": "^4.17.5",

@@ -1,11 +1,25 @@
+@import './variables.scss';
+
 :host {
-  padding: 8px;
-  display: flex;
+  display: block;
+}
+
+.top-card {
+  width: 100vw;
+  height: 175px;
+  background-color: lighten(map-get($colors, purple-light), 10%);
+  line-height: 130px;
+  letter-spacing: 10px;
+  font-family: 'SlatePro', sans-serif;
+  font-size: x-large;
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
 }
 
 .filters {
   $padding: 8px 16px;
-  width: 20vw;
   height: 50vh;
   position: sticky;
   top: 16px;
@@ -14,30 +28,23 @@
     margin: 0;
     padding: $padding;
   }
-
-
-  .prices-group {
-    padding: 0px 16px;
-    display: flex;
-    flex-wrap: nowrap;
-    mat-form-field {
-      width: calc(50% - 8px);
-      margin-right: 8px;
-    }
-  }
 }
 
-.products-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 75vw;
-  margin-left: auto;
+main {
+  margin: -48px auto 48px auto;
+  background-color: white;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
 }
 
 mat-card {
   width: 250px;
-  margin: 8px;
+  margin: 0px 8px 8px 8px;
+  mat-card-title {
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   mat-card-content {
     font-family: Roboto Mono;
     font-size: 22px;
@@ -47,5 +54,17 @@ mat-card {
   img[mat-card-image] {
     height: 250px;
     object-fit: contain;
+  }
+}
+
+mat-chip-list .price {
+  position: absolute;
+  right: 32px;
+  top: #{$header-height + 49px};
+}
+
+@media (max-width: 450px) {
+  mat-card {
+    width: 100%;
   }
 }

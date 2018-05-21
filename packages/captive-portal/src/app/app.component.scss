@@ -1,0 +1,58 @@
+@import './variables.scss';
+
+:host {
+  position: relative;
+  display: block;
+  height: calc(100vh - #{$header-height});
+}
+
+mat-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0;
+}
+
+
+mat-form-field {
+  display: block;
+}
+
+header {
+  padding: 16px 24px;
+  color: white;
+}
+
+header.bg-purple-light {
+  background-color:  map-get($colors, purple-light );
+}
+
+main {
+  padding: 16px;
+}
+
+
+nav {
+  width: 100vw;
+  height: $header-height;
+  background-color: map-get($colors, purple-light );
+  box-sizing: border-box;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
+  display: flex;
+  align-items: center;
+}
+
+nav img {
+  height: 100%;
+  object-fit: contain;
+  background-color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+mat-icon {
+  color: white;
+}

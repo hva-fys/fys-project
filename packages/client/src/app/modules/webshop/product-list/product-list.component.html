@@ -1,37 +1,33 @@
-<div class="filters">
-  <h1>Filters</h1>
-  <mat-divider></mat-divider>
-  <h3>
-    Price
-  </h3>
+<mat-chip-list>
+  <mat-chip routerLink="checkout" class="price"> € {{ total$ | async }} </mat-chip>
+</mat-chip-list>
 
-  <div class="prices-group">
-    <mat-form-field>
-      <mat-select placeholder="Start price">
-        <mat-option *ngFor="let price of prices" [value]="price">
-          {{ price }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+<div class="top-card">
+  {{ category }}
+</div>
+
+<main class="row no-gutters justify-content-center p-3 mx-2 mx-md-5">
+  <!-- <div class="filters d-none d-md-block col-12 col-md-3">
+    <h3>
+      Filters
+    </h3>
+    <div>
+
+    </div>
+  </div> -->
 
 
-    <mat-form-field>
-      <mat-select placeholder="End price">
-        <mat-option *ngFor="let price of prices" [value]="price">
-          {{ price }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+  <!-- <div class="d-flex justify-content-center col-12 col-md-9 flex-wrap"> -->
+  <div class="d-flex justify-content-center col-12, col-md-8 flex-wrap">
+    <mat-card @fadeInOut *ngFor="let product of products">
+      <mat-card-title [attr.title]="product.name">{{ product.name }}</mat-card-title>
+      <img mat-card-image [src]="product.imageUrl" alt="Product photo of a {{ product.title }}">
+      <mat-card-content>
+        € {{ product.price }}
+      </mat-card-content>
+      <mat-card-actions>
+        <button color="primary" mat-button (click)="addToCart(product.id)">Add to cart</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
-</div>
-
-
-<div class="products-container">
-  <mat-card @fadeInOut *ngFor="let product of products">
-    <mat-card-title>{{ product.name }}</mat-card-title>
-    <img mat-card-image [src]="product.imageUrl" alt="Product photo of a {{ product.title }}">
-    <mat-card-content>
-      € {{ product.price }}
-    </mat-card-content>
-  </mat-card>
-</div>
+</main>

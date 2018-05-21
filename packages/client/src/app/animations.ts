@@ -3,7 +3,10 @@ import {
   state,
   style,
   animate,
-  transition
+  transition,
+  query,
+  group,
+  stagger
 } from '@angular/animations';
 
 /**
@@ -27,3 +30,20 @@ export const fadeInOut = [
   ])
 ];
 
+
+
+export const routerTransition = trigger('routerTransition', [
+  transition('* <=> *', [
+    query(':enter, :leave', style({  }), { optional: true } ),
+    query('mat-card', style({ opacity: 0 }), { optional: true }),
+    group([  // block executes in parallel
+      query(':enter', style({ opacity: 1 }), { optional: true }),
+      query(':leave', style({ opacity: 0 }), { optional: true }),
+    ]),
+    query(':enter mat-card', stagger(100, [
+      style({ transform: 'translateY(100px)' }),
+      animate('150ms ease-in-out',
+        style({ transform: 'translateY(0px)', opacity: 1 })),
+    ]), { optional: true }),
+  ])
+]);
