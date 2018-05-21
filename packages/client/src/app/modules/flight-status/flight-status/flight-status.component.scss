@@ -1,0 +1,89 @@
+@import './variables.scss';
+
+:host {
+  display: block;
+}
+
+agm-map {
+  display: block;
+  height: 50vh;
+}
+
+mwl-gauge {
+  width: 100%;
+  height: 100%;
+  display: block;
+  padding: 10px;
+  ::ng-deep {
+    .gauge > .dial {
+      stroke: map-get($colors, purple-dark);
+      stroke-width: 2;
+      fill: rgba(0,0,0,0);
+    }
+    .gauge > .value {
+      stroke: map-get($colors, primary);
+      stroke-width: 2;
+      fill: rgba(0,0,0,0);
+    }
+
+    .gauge > .value-text {
+      fill: white;
+    }
+  }
+}
+
+.mini-card {
+  width: 150px;
+  height: 150px;
+  background-color: map-get($colors, purple-dark);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
+  border-radius: 4px;
+  margin: 0px 4px;
+  color: white;
+  position: relative;
+
+  .metric-card {
+    text-align:center;
+    padding:16px 24px;
+    .title{
+      font-size: 1.5rem;
+    }
+
+    .value {
+      font-size: 2rem;
+    }
+  }
+
+  svg.speed-icon {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: map-get($colors, purple-dark);
+    padding: 8px;
+    box-sizing: content-box;
+  }
+  .description {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: lighten(map-get($colors, purple-dark), 10%);
+    opacity: 0;
+    transition: opacity 300ms;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+
+  &:hover {
+    .description {
+      opacity: 0.9;
+    }
+  }
+}
