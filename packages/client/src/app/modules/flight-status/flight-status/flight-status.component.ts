@@ -45,9 +45,7 @@ export class FlightStatusComponent implements OnInit, OnDestroy, ILoggable {
 
   public airplanes: Map<FlightInformation.TAirplane, string> = new Map();
 
-  public plane$ = this.$flightStatus.state.plane$.pipe(
-    // tap(plane => this.logger.log('plane change', plane))
-  );
+  public plane$ = this.$flightStatus.state.plane$;
 
   public destDescription$: Observable<string>;
 

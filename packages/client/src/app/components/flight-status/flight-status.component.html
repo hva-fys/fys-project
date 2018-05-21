@@ -1,7 +1,7 @@
 <div class="px-2">{{ from }}</div>
 
 <div class="middle-container px-2">
-  <section *ngIf="showETA">ETA: 2 hours</section>
+  <section *ngIf="showETA">ETA: {{ eta$ | async }} hours</section>
   <section *ngIf="!showETA">
     <div class="line"></div>
     <mat-icon [style.left.%]="(progress$ | async) * 0.9">airplanemode_active</mat-icon>
