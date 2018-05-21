@@ -71,5 +71,7 @@ export declare namespace FlightInformation {
     interface IFlight {
         start: ILocation;
         end: ILocation;
+        /** This should be saved locally so the user can re-fetch the flight */
+        flightNumber: string;
     }
 }

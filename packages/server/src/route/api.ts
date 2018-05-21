@@ -16,7 +16,8 @@ const flightInformation: FlightInformation.IFlight[] = [
             longitude: "-157.8583333",
             name: "Honolulu",
             shortHand: "HI"
-        }
+        },
+        flightNumber: 'N269HV'
     },
     {
         start: {
@@ -30,7 +31,8 @@ const flightInformation: FlightInformation.IFlight[] = [
             longitude: "-80.605659",
             name: "Cape Canaveral",
             shortHand: "CC"
-        }
+        },
+        flightNumber: 'N46391'
     }
 ];
 
