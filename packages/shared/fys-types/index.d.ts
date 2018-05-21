@@ -60,3 +60,16 @@ export declare namespace TicTacToe {
     
 }
 
+export declare namespace FlightInformation {
+    interface ILocation {
+        longitude: string;
+        latitude: string;
+        name: string;
+        shortHand: string;
+    }
+
+    interface IFlight {
+        start: ILocation;
+        end: ILocation;
+    }
+}
