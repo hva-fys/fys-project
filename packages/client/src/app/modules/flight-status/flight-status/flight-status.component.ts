@@ -6,6 +6,7 @@ import { FlightInformation } from 'fys';
 import { WikipediaService } from '../../../services/wikipedia.service';
 import { tap } from 'rxjs/operators';
 import { Logger, ILoggable } from '../../../shared/logger';
+import { Observable } from 'rxjs/Observable';
 
 @Logger()
 @Component({
@@ -39,7 +40,7 @@ export class FlightStatusComponent implements OnInit, OnDestroy, ILoggable {
 
   public images = {
     cc: ['./assets/images/locations/cc/1.jpg', './assets/images/locations/cc/2.jpg', './assets/images/locations/cc/3.jpg'],
-    hh: ['./assets/images/locations/hh/1.jpg', './assets/images/locations/hh/2.jpg', './assets/images/locations/hh/3.jpg']
+    hh: ['./assets/images/locations/hi/1.jpg', './assets/images/locations/hi/2.jpg', './assets/images/locations/hi/3.jpg']
   };
 
   public airplanes: Map<FlightInformation.TAirplane, string> = new Map();
@@ -47,6 +48,8 @@ export class FlightStatusComponent implements OnInit, OnDestroy, ILoggable {
   public plane$ = this.$flightStatus.state.plane$.pipe(
     // tap(plane => this.logger.log('plane change', plane))
   );
+
+  public destDescription$: Observable<string>;
 
   private stop$ = new Subject<void>();
 
@@ -58,7 +61,7 @@ export class FlightStatusComponent implements OnInit, OnDestroy, ILoggable {
     this.airplanes.set('737400', './assets/images/airplanes/737400.jpg');
     this.airplanes.set('737800', './assets/images/airplanes/737800.jpg');
 
-    this.$wikipedia.getIntro('Cape Canaveral').subscribe( val => this.logger.log(val));
+    this.destDescription$ = this.$wikipedia.getIntro('Amsterdam');
   }
 
   ngOnInit() {

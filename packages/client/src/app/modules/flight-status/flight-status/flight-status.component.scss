@@ -98,9 +98,13 @@ mwl-gauge {
     width: 100%;
   }
 
-  .content {
-    padding: 16px;
+  .content, h1 {
     background-color: whitesmoke;
+  }
+  .content {
+    overflow: scroll;
+    // 63px because of the h1 and padding
+    height: calc(100% - 63px);
   }
 }
 

@@ -11,12 +11,14 @@
 
 <div class="row no-gutters">
   <div class="col-12 col-md-6 block">
-    <fys-img-gallery [images]="images.cc"></fys-img-gallery>
+    <fys-img-gallery [images]="images.hh"></fys-img-gallery>
   </div>
   <div class="col-12 col-md-6 block">
-    <div class="content h-100">
-      <h1>Cape Canaveral</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum eius tenetur deserunt velit voluptatum obcaecati, corrupti quia magni culpa, perspiciatis enim. Aliquam nisi iusto corrupti quisquam facilis, cum excepturi rem?</p>
+    <h1 class="p-2 m-0 d-flex">
+      <span>Honolulu</span>
+    </h1>
+    <div class="content p-2">
+      {{ destDescription$ | async }}
     </div>
   </div>
   <div class="col-12 col-md-6 block">
