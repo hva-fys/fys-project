@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {FlightStatusService} from "../../../services/flight-status.service";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs/Subject";
-import {FlightInformation} from "../../../../../../shared/fys-types";
+import { FlightInformation } from 'fys';
+import { WikipediaService } from '../../../services/wikipedia.service';
 
 @Component({
   selector: 'fys-flight-status',
@@ -32,6 +33,13 @@ export class FlightStatusComponent implements OnInit {
 
   num = 0;
 
+  public images = {
+    cc: ['./assets/images/locations/cc/1.jpg', './assets/images/locations/cc/2.jpg', './assets/images/locations/cc/3.jpg'],
+    hh: ['./assets/images/locations/hh/1.jpg', './assets/images/locations/hh/2.jpg', './assets/images/locations/hh/3.jpg']
+  };
+
+  public airplanes: Map<FlightInformation.TAirplane, string> = new Map();
+
   speedLabelFn: Function = () => `${this.num} km/h`;
 
   private stop$ = new Subject<void>();
@@ -45,7 +53,14 @@ export class FlightStatusComponent implements OnInit {
     speed: 0,
   };
 
-  constructor(private flightStatusService: FlightStatusService) {
+  constructor(private flightStatusService: FlightStatusService, private $wikipedia: WikipediaService) {
+    this.airplanes.set('a320', './assets/images/airplanes/a320.jpg');
+    this.airplanes.set('737300', './assets/images/airplanes/737300.jpg');
+    this.airplanes.set('737400', './assets/images/airplanes/737400.jpg');
+    this.airplanes.set('737800', './assets/images/airplanes/737800.jpg');
+
+    this.$wikipedia.getIntro('Cape Canaveral').subscribe();
+
     this.flightStatusService.state.plane$.pipe(
       takeUntil(this.stop$)
     ).subscribe((plane) => this.plane = plane);
@@ -63,6 +78,9 @@ export class FlightStatusComponent implements OnInit {
       lat: this.curr.lat + latSteps,
       lng: this.curr.lng + lngSteps
     };
+
+    this.lat = this.curr.lat + latSteps;
+    this.lng = this.curr.lng + lngSteps;
   }
 
   ngOnDestroy() {

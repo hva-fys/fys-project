@@ -77,6 +77,8 @@ export declare namespace FlightInformation {
         flightNumber: string;
     }
 
+    type TAirplane = 'a320' | '737300' | '737400' | '737800'
+    
     interface IPlane {
         lat: number,
         lng: number,
