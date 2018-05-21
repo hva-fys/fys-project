@@ -5,6 +5,7 @@ import { FlightStatusComponent } from './flight-status/flight-status.component';
 import { AgmCoreModule } from '@agm/core';
 import { GaugeModule } from 'angular-gauge';
 import { FormsModule } from '@angular/forms';
+import { ImgGalleryComponent } from '../../components/img-gallery/img-gallery.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,6 @@ export const RoutingConfig: ModuleWithProviders = RouterModule.forChild(routes);
     GaugeModule.forRoot(),
     FormsModule
   ],
-  declarations: [FlightStatusComponent]
+  declarations: [FlightStatusComponent, ImgGalleryComponent]
 })
 export class FlightStatusModule { }
