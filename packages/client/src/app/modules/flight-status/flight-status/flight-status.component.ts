@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { style, animate, trigger, transition, query, stagger, keyframes } from '@angular/animations';
 import {FlightStatusService} from "../../../services/flight-status.service";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs/Subject";

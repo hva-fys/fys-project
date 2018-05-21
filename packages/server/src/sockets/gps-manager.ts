@@ -80,8 +80,8 @@ export class GPSManager {
             this.attrs.time.start += 100;
         }
 
-        this.plane.lat -= (start.lat - dest.lat) / (time.end / 1000);
-        this.plane.lng -= (start.lng - dest.lng) / (time.end / 1000);
+        this.plane.lat -= (start.lat - dest.lat) / (time.end / 100);
+        this.plane.lng -= (start.lng - dest.lng) / (time.end / 100);
 
         this.socket.emit('status' as fys.FlightInformation.TSocketEvent, this.plane);
     }
