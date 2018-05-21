@@ -12,6 +12,7 @@ import { FlightStatusService } from './services/flight-status.service';
 import { FlightStatusComponent } from './components/flight-status/flight-status.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { WikipediaService } from './services/wikipedia.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [FlightStatusService],
+  providers: [FlightStatusService, WikipediaService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
