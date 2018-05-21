@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { style, animate, trigger, transition, query, stagger, keyframes } from '@angular/animations';
-import { FlightStatusService } from '../../../services/flight-status.service';
+import {FlightStatusService} from '../../../services/flight-status.service';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs/Subject';
 import { FlightInformation } from 'fys';
 import { WikipediaService } from '../../../services/wikipedia.service';
-import { Subject } from 'rxjs/Subject';
 import { tap } from 'rxjs/operators';
 import { Logger, ILoggable } from '../../../shared/logger';
 
@@ -51,7 +51,6 @@ export class FlightStatusComponent implements OnInit, OnDestroy, ILoggable {
   private stop$ = new Subject<void>();
 
   speedLabelFn: Function = () => `${this.speed} km/h`;
-
 
   constructor(private $flightStatus: FlightStatusService, private $wikipedia: WikipediaService) {
     this.airplanes.set('a320', './assets/images/airplanes/a320.jpg');
