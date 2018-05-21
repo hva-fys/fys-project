@@ -9,6 +9,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import {TicTacToe} from './sockets/tic-tac-toe';
 import { last } from 'lodash';
+import {GPSManager} from "./sockets/gps-manager";
 
 /**
  * Environment.
@@ -150,6 +151,7 @@ export class Environment {
         const socket = socketio(httpInstance);
 
         new TicTacToe(socket);
+        new GPSManager(socket);
 
         if (httpInstance) {
             httpInstance.listen(parseInt(SERVER_PORT) || 8080, SERVER_HOST || '0.0.0.0', () => {
