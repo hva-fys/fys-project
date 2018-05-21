@@ -18,13 +18,9 @@ export class GPSManager {
         this.socket = socket.of('/flight-status');
 
         this.attrs = {
-            time: {
-                start: 0,
-                end: 1000 * 60 * 60 * 1,
-            },
             speed: {
-                max: 7200,
-                min: 0,
+                max: 870,
+                min: 200,
             },
             start: {
                 lat: 54.66112372206639,
@@ -40,22 +36,37 @@ export class GPSManager {
         this.plane = {
             lat: this.attrs.start.lat,
             lng: this.attrs.start.lng,
-
             dist: 0,
             height: 0,
             speed: 0,
+            time: 0,
         };
 
-        this.distance();
+        this.attrs.dist = this.distance(this.attrs);
 
         this.run();
     }
 
     /**
-     * Distance.
+     * Calculate time avg.
+     *
+     * @param dist
+     * @param speed
+     *
+     * @returns {number}
      */
-    private distance(): void {
-        const {start, dest} = this.attrs;
+    private timeAVG(dist, speed): number {
+        return 1000 * 60 * 60 * dist / speed;
+    }
+
+    /**
+     *
+     * @param {any} start
+     * @param {any} dest
+     *
+     * @returns {number}
+     */
+    private distance({start, dest}): number {
 
         const R = 6371; // Radius earth.
 
@@ -64,24 +75,36 @@ export class GPSManager {
 
         const a = 0.5 - Math.cos(dLat) / 2 + Math.cos(start.lat * Math.PI / 180) * Math.cos(start.lat * Math.PI / 180) * (1 - Math.cos(dLng)) / 2;
 
-        this.attrs.dist = R * 2 * Math.asin(Math.sqrt(a));
+        return (R * 2 * Math.asin(Math.sqrt(a)));
     }
 
     /**
      * Update GPS.
      */
     private update(): void {
-        const {time, start, dest} = this.attrs;
+        const {speed, start, dest, dist} = this.attrs;
 
-        if (time.start >= time.end) {
+        const time = this.timeAVG(dist, speed.max);
+
+        if (this.plane.time >= time) {
             clearInterval(this.updateInterval);
         }
         else {
-            this.attrs.time.start += 100;
+            this.plane.time += 100;
         }
 
-        this.plane.lat -= (start.lat - dest.lat) / (time.end / 100);
-        this.plane.lng -= (start.lng - dest.lng) / (time.end / 100);
+        this.plane.speed = speed.max;
+
+        this.plane.lat -= ((start.lat - dest.lat) * 100) / (time);
+        this.plane.lng -= ((start.lng - dest.lng) * 100) / (time);
+
+        this.plane.dist = this.distance({
+            start: {
+                lat: this.plane.lat,
+                lng: this.plane.lng
+            },
+            dest: dest
+        });
 
         this.socket.emit('status' as fys.FlightInformation.TSocketEvent, this.plane);
     }

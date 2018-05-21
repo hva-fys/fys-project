@@ -30,7 +30,7 @@
         />
         </svg>
 
-        <mwl-gauge [max]="1000" [dialStartAngle]="-90" [dialEndAngle]="-90.001" [value]="speed" [animationDuration]="1" [label]="speedLabelFn"
+        <mwl-gauge [max]="1000" [dialStartAngle]="-90" [dialEndAngle]="-90.001" [value]="(plane$ | async)?.speed" [animationDuration]="1" [label]="speedLabelFn"
           i18n-label></mwl-gauge>
 
         <div class="description">Speed</div>
