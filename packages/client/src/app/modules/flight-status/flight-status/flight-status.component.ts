@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { style, animate, trigger, transition, query, stagger, keyframes } from '@angular/animations';
 import { FlightStatusService } from '../../../services/flight-status.service';
 import { FlightInformation } from 'fys';
@@ -9,7 +9,8 @@ import { WikipediaService } from '../../../services/wikipedia.service';
   templateUrl: './flight-status.component.html',
   styleUrls: ['./flight-status.component.scss']
 })
-export class FlightStatusComponent implements OnInit {
+
+export class FlightStatusComponent implements OnInit, OnDestroy {
   lat = 53.78767124584938;
   lng = -0.9008782187499946;
 
@@ -55,7 +56,6 @@ export class FlightStatusComponent implements OnInit {
 
   next() {
     const latSteps = (this.dest.lat - this.start.lat) / 50;
-
     const lngSteps = (this.dest.lng - this.start.lng) / 50;
 
     this.curr = {
@@ -67,4 +67,7 @@ export class FlightStatusComponent implements OnInit {
     this.lng = this.curr.lng + lngSteps;
   }
 
+  ngOnDestroy() {
+    this.stop$.next();
+  }
 }

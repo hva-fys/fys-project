@@ -1,10 +1,13 @@
 import * as SocketIO from 'socket.io';
+import * as fys from "../../../shared/fys-types";
+import {FlightInformation} from "../../../shared/fys-types";
+import IPlane = FlightInformation.IPlane;
 
 export class GPSManager {
     private socket: SocketIO.Namespace;
     private updateInterval: NodeJS.Timer;
     private attrs: any;
-    private plane: any;
+    private plane: IPlane;
 
     /**
      * GPS Manager.
@@ -12,31 +15,31 @@ export class GPSManager {
      * @param {SocketIO.Server} socket
      */
     constructor(socket: SocketIO.Server) {
-        this.socket = socket.of('/gps-manager');
+        this.socket = socket.of('/flight-status');
 
         this.attrs = {
             time: {
                 start: 0,
-                end: 1000 * 60 * 60 * 2,
+                end: 1000 * 60 * 60 * 1,
             },
             speed: {
                 max: 7200,
                 min: 0,
             },
             start: {
-                lat: 49.2715000,
-                lon: -121.7493500,
+                lat: 54.66112372206639,
+                lng: -1.8896484375
             },
-            end: {
-                lat: 49.18258,
-                lon: -121.75441,
+            dest: {
+                lat: 52.36218321674427,
+                lng: 4.921875
             },
             dist: 0,
         };
 
         this.plane = {
-            lat: 0,
-            lon: 0,
+            lat: this.attrs.start.lat,
+            lng: this.attrs.start.lng,
 
             dist: 0,
             height: 0,
@@ -52,14 +55,14 @@ export class GPSManager {
      * Distance.
      */
     private distance(): void {
-        const {start, end} = this.attrs;
+        const {start, dest} = this.attrs;
 
         const R = 6371; // Radius earth.
 
-        const dLat = (end.lat - start.lat) * Math.PI / 180;
-        const dLon = (end.lon - start.lon) * Math.PI / 180;
+        const dLat = (dest.lat - start.lat) * Math.PI / 180;
+        const dLng = (dest.lng - start.lng) * Math.PI / 180;
 
-        const a = 0.5 - Math.cos(dLat) / 2 + Math.cos(start.lat * Math.PI / 180) * Math.cos(start.lat * Math.PI / 180) * (1 - Math.cos(dLon)) / 2;
+        const a = 0.5 - Math.cos(dLat) / 2 + Math.cos(start.lat * Math.PI / 180) * Math.cos(start.lat * Math.PI / 180) * (1 - Math.cos(dLng)) / 2;
 
         this.attrs.dist = R * 2 * Math.asin(Math.sqrt(a));
     }
@@ -68,7 +71,8 @@ export class GPSManager {
      * Update GPS.
      */
     private update(): void {
-        const {time} = this.attrs;
+        const {time, start, dest} = this.attrs;
+
         if (time.start >= time.end) {
             clearInterval(this.updateInterval);
         }
@@ -76,7 +80,10 @@ export class GPSManager {
             this.attrs.time.start += 100;
         }
 
+        this.plane.lat -= (start.lat - dest.lat) / (time.end / 1000);
+        this.plane.lng -= (start.lng - dest.lng) / (time.end / 1000);
 
+        this.socket.emit('status' as fys.FlightInformation.TSocketEvent, this.plane);
     }
 
     /**

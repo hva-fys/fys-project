@@ -1,9 +1,9 @@
 <agm-map [latitude]="lat" [longitude]="lng">
   <agm-polyline>
-      <agm-polyline-point [latitude]="start.lat" [longitude]="start.lng">
-      </agm-polyline-point>
-      <agm-polyline-point [latitude]="curr.lat" [longitude]="curr.lng">
-      </agm-polyline-point>
+      <agm-polyline-point [latitude]="start.lat" [longitude]="start.lng"></agm-polyline-point>
+      <agm-polyline-point [latitude]="dest.lat" [longitude]="dest.lng"></agm-polyline-point>
+
+      <agm-marker [latitude]="plane.lat" [longitude]="plane.lng"></agm-marker>
   </agm-polyline>
 
   <agm-marker
