@@ -61,6 +61,8 @@ export declare namespace TicTacToe {
 }
 
 export declare namespace FlightInformation {
+    type TSocketEvent = 'status';
+
     interface ILocation {
         longitude: string;
         latitude: string;
@@ -73,5 +75,14 @@ export declare namespace FlightInformation {
         end: ILocation;
         /** This should be saved locally so the user can re-fetch the flight */
         flightNumber: string;
+    }
+
+    interface IPlane {
+        lat: number,
+        lng: number,
+
+        dist: number,
+        height: number,
+        speed: number,
     }
 }
