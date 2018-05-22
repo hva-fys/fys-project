@@ -5,6 +5,8 @@ import * as io from 'socket.io-client';
 import {share} from 'rxjs/operators';
 import * as fys from '../../../../shared/fys-types';
 import {Observable} from 'rxjs/Observable';
+import { FlightInformation } from 'fys';
+import { HttpClient } from '@angular/common/http';
 
 const SOCKET_END_POINT = `${environment.END_POINT_URL}/flight-status`;
 
@@ -25,7 +27,7 @@ export class FlightStatusService {
     plane$: new Observable()
   };
 
-  constructor() {
+  constructor( private http: HttpClient ) {
     this.socket = io(SOCKET_END_POINT).connect();
 
     setInterval(() => {
@@ -37,6 +39,12 @@ export class FlightStatusService {
     }, 1000);
 
     this.state.plane$ = this.on<fys.FlightInformation.IPlane>('status');
+  }
+
+  public getCurrentFlight(): Observable<FlightInformation.IFlight> {
+    const url = `http://${environment.END_POINT_URL}/api/flight-info`;
+
+    return this.http.get<FlightInformation.IFlight>(url);
   }
 
   /** Turns a socket.io callback into an rxjs stream */

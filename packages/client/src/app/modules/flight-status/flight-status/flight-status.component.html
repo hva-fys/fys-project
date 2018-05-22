@@ -1,12 +1,14 @@
-<agm-map [latitude]="(plane$ | async)?.lat" [longitude]="(plane$ | async)?.lng" [mapTypeId]="'satellite'">
-  <agm-polyline>
-      <agm-polyline-point [latitude]="start.lat" [longitude]="start.lng"></agm-polyline-point>
-      <agm-polyline-point [latitude]="dest.lat" [longitude]="dest.lng"></agm-polyline-point>
-      <ng-container *ngIf=" plane$ | async; let plane">
+<ng-container *ngIf=" plane$ | async; let plane">
+  <agm-map [latitude]="plane.lat" [longitude]="plane.lng" mapTypeId="satellite">
+      <agm-polyline>
+        <ng-container *ngIf="flight$ | async; let flight">
+          <agm-polyline-point [latitude]="flight.start.latitude" [longitude]="flight.start.longitude"></agm-polyline-point>
+          <agm-polyline-point [latitude]="plane.lat" [longitude]="plane.lng"></agm-polyline-point>
+        </ng-container>
         <agm-marker [latitude]="plane.lat" [longitude]="plane.lng" iconUrl="../../assets/images/flight-24px.svg"></agm-marker>
-      </ng-container>
-  </agm-polyline>
-</agm-map>
+      </agm-polyline>
+  </agm-map>
+  </ng-container>
 
 
 <div class="row no-gutters">
@@ -18,7 +20,7 @@
       <span>Honolulu</span>
     </h1>
     <div class="content p-2">
-      {{ destDescription$ | async }}
+      {{ planeDescription$ | async }}
     </div>
   </div>
   <div class="col-12 col-md-6 block">
@@ -30,7 +32,7 @@
         />
         </svg>
 
-        <mwl-gauge [max]="1000" [dialStartAngle]="-90" [dialEndAngle]="-90.001" [value]="(plane$ | async)?.speed" [animationDuration]="1" [label]="speedLabelFn"
+        <mwl-gauge #f [max]="1000" [dialStartAngle]="-90" [dialEndAngle]="-90.001" [animationDuration]="1" [value]="speed$ | async"
           i18n-label></mwl-gauge>
 
         <div class="description">Speed</div>

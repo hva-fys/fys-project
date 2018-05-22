@@ -27,15 +27,11 @@ export class FlightStatusComponent implements OnInit {
   /** What to show to the user right now */
   public showETA = false;
 
-  constructor(private flightStatusService: FlightStatusService, private http: HttpClient) {
-    const url = `http://${environment.END_POINT_URL}/api/flight-info`;
-
-    console.log(url);
-
-    this.http.get(url)
+  constructor(private flightStatusService: FlightStatusService) {
+    this.flightStatusService.getCurrentFlight()
       .subscribe( (flightInfo: FlightInformation.IFlight) => {
-        this.from = flightInfo.start.shortHand;
-        this.to = flightInfo.end.shortHand;
+          this.from = flightInfo.start.shortHand;
+          this.to = flightInfo.end.shortHand;
       });
   }
 

@@ -3,6 +3,7 @@ import * as fys from "../../../shared/fys-types";
 import {FlightInformation} from "../../../shared/fys-types";
 import IPlane = FlightInformation.IPlane;
 import { flightInformation } from '../data/mock-data';
+import { sample, range } from 'lodash';
 
 export class GPSManager {
     private socket: SocketIO.Namespace;
@@ -94,7 +95,7 @@ export class GPSManager {
             this.plane.time += 100;
         }
 
-        this.plane.speed = speed.max;
+        this.plane.speed = sample(range(speed.max - 20, speed.max));
 
         this.plane.lat -= ((start.lat - dest.lat) * 100) / (time);
         this.plane.lng -= ((start.lng - dest.lng) * 100) / (time);

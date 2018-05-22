@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {FlightStatusService} from '../../../services/flight-status.service';
-import {takeUntil} from 'rxjs/operators';
+import {takeUntil, map, first} from 'rxjs/operators';
 import {Subject} from 'rxjs/Subject';
 import { FlightInformation } from 'fys';
 import { WikipediaService } from '../../../services/wikipedia.service';
@@ -36,7 +36,7 @@ export class FlightStatusComponent implements OnInit, OnDestroy, ILoggable {
     lng: 4.921875
   };
 
-  speed = 400;
+  public speed = 500;
 
   public images = {
     cc: ['./assets/images/locations/cc/1.jpg', './assets/images/locations/cc/2.jpg', './assets/images/locations/cc/3.jpg'],
@@ -49,9 +49,18 @@ export class FlightStatusComponent implements OnInit, OnDestroy, ILoggable {
 
   public destDescription$: Observable<string>;
 
+  public flight$ = this.$flightStatus.getCurrentFlight();
+
   private stop$ = new Subject<void>();
 
-  speedLabelFn: Function = () => `${this.speed} km/h`;
+  public speed$: Observable<number> = this.$flightStatus.state.plane$.pipe(
+    map(plane => plane.speed),
+  );
+
+  public speedLabel$: Observable<string> = this.$flightStatus.state.plane$.pipe(
+    map(plane => `${plane.speed} km/h`)
+  );
+
 
   constructor(private $flightStatus: FlightStatusService, private $wikipedia: WikipediaService) {
     this.airplanes.set('a320', './assets/images/airplanes/a320.jpg');
@@ -60,6 +69,13 @@ export class FlightStatusComponent implements OnInit, OnDestroy, ILoggable {
     this.airplanes.set('737800', './assets/images/airplanes/737800.jpg');
 
     this.destDescription$ = this.$wikipedia.getIntro('Amsterdam');
+
+    this.$flightStatus.state.plane$.subscribe( plane => {
+      this.logger.log(plane.time);
+      this.speed = plane.speed;
+    });
+
+    this.flight$.subscribe( flight => this.logger.log('flight is...', flight));
   }
 
   ngOnInit() {

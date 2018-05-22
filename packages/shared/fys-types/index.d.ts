@@ -64,8 +64,8 @@ export declare namespace FlightInformation {
     type TSocketEvent = 'status';
 
     interface ILocation {
-        longitude: string;
-        latitude: string;
+        longitude: number;
+        latitude: number;
         name: string;
         shortHand: string;
     }
