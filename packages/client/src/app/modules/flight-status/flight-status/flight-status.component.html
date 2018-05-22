@@ -3,7 +3,7 @@
       <agm-polyline>
         <ng-container *ngIf="flight$ | async; let flight">
           <agm-polyline-point [latitude]="flight.start.latitude" [longitude]="flight.start.longitude"></agm-polyline-point>
-          <agm-polyline-point [latitude]="plane.lat" [longitude]="plane.lng"></agm-polyline-point>
+          <agm-polyline-point [latitude]="flight.end.latitude" [longitude]="flight.end.longitude"></agm-polyline-point>
         </ng-container>
         <agm-marker [latitude]="plane.lat" [longitude]="plane.lng" iconUrl="../../assets/images/flight-24px.svg"></agm-marker>
       </agm-polyline>
