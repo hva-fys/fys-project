@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { fadeInOut } from '../../../animations';
 import { Logger, ILoggable } from '../../../shared/logger';
-import { IProduct, products } from '../products';
+import { products } from '../products';
 import { MatSnackBar } from '@angular/material';
 import { take } from 'rxjs/operators/take';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { StateService } from '../state.service';
 import { map } from 'rxjs/operators/map';
 import { filter } from 'rxjs/operators/filter';
+import { Webshop } from 'fys';
 
 
 @Logger()
@@ -22,7 +23,7 @@ export class ProductListComponent implements OnInit, ILoggable {
   logger: Partial<Console>;
 
 
-  public products: IProduct[] = products;
+  public products$: Observable<Webshop.IProduct[]> = this.state$.getProducts();
 
   public category = 'Watches';
 

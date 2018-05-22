@@ -19,7 +19,7 @@
 
   <!-- <div class="d-flex justify-content-center col-12 col-md-9 flex-wrap"> -->
   <div class="d-flex justify-content-center col-12, col-md-8 flex-wrap">
-    <mat-card @fadeInOut *ngFor="let product of products">
+    <mat-card @fadeInOut *ngFor="let product of (products$ | async)">
       <mat-card-title [attr.title]="product.name">{{ product.name }}</mat-card-title>
       <img mat-card-image [src]="product.imageUrl" alt="Product photo of a {{ product.title }}">
       <mat-card-content>

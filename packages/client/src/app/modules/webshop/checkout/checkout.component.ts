@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { filter, map } from 'rxjs/operators';
 import { StateService, ICartLine } from '../state.service';
-import { IProduct } from '../products';
+import { Webshop } from 'fys';
 
 @Component({
   selector: 'fys-checkout',
@@ -18,7 +18,7 @@ export class CheckoutComponent implements OnInit {
     map(cart => cart.total)
   );
 
-  public products$: Observable<IProduct[]> = this.state$.cart$.pipe(
+  public products$: Observable<Webshop.IProduct[]> = this.state$.cart$.pipe(
     map( cart => cart.lines),
     map( lines => {
 

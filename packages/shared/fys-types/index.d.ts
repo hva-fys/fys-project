@@ -88,3 +88,12 @@ export declare namespace FlightInformation {
         speed: number,
     }
 }
+
+export declare namespace Webshop {
+    interface IProduct {
+        name: string;
+        imageUrl: string;
+        price: number;
+        id: string;
+    }
+}

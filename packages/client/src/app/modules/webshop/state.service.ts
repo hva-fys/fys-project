@@ -1,11 +1,14 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { IProduct } from './products';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { takeUntil, map, filter, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 import { Logger, ILoggable } from '../../shared/logger';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs/Observable';
+import { Webshop } from 'fys';
 
-export interface ICartLine extends IProduct {
+export interface ICartLine extends Webshop.IProduct {
   quantity: number;
 }
 
@@ -23,7 +26,7 @@ export class StateService implements OnDestroy, ILoggable {
 
   private stop$ = new Subject<void>();
 
-  constructor() {
+  constructor(private http: HttpClient ) {
     this.cart$.pipe(
       takeUntil(this.stop$),
       filter(Boolean),
@@ -47,7 +50,7 @@ export class StateService implements OnDestroy, ILoggable {
     this.cart$.next(currentCart);
   }
 
-  public addToCart(product: IProduct) {
+  public addToCart(product: Webshop.IProduct) {
     const currentCart = this.cart$.value;
 
     const productMatchIndex = currentCart.lines.findIndex( possibleMatch => possibleMatch.id === product.id );
@@ -76,6 +79,15 @@ export class StateService implements OnDestroy, ILoggable {
     };
 
     this.cart$.next(newCart);
+  }
+
+  public getProducts(): Observable<Webshop.IProduct[]> {
+    this.logger.log('getting products...');
+    const stream$ = this.http.get<Webshop.IProduct[]>(`http://${environment.END_POINT_URL}/api/products/list`);
+
+    stream$.subscribe( products => this.logger.log( products ));
+
+    return stream$;
   }
 
   private calculateCartTotal(products: ICartLine[]): number {

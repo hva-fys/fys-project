@@ -1,12 +1,6 @@
-export interface IProduct {
-  name: string;
-  imageUrl: string;
-  price: number;
-  id: string;
-}
+import { Webshop } from 'fys';
 
-
-export const products: IProduct[] = [
+export const products: Webshop.IProduct[] = [
   {
     name: 'Apple watch',
     imageUrl: './assets/images/products/apple-black-watch.png',

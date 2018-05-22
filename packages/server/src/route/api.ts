@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as env from "../environment";
 import { first } from 'lodash';
-import { flightInformation } from '../data/mock-data';
+import { flightInformation, products } from '../data/mock-data';
 
 /**
  * Auth route segment.
@@ -29,6 +29,10 @@ module.exports = (Environment: env.Environment) => {
 
         res.json(randomFlight);
     });
+
+    router.get('/products/list', (req, res) => {
+        res.json(products);
+    })
 
     return router;
 };
