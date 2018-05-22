@@ -2,6 +2,7 @@ import * as SocketIO from 'socket.io';
 import * as fys from "../../../shared/fys-types";
 import {FlightInformation} from "../../../shared/fys-types";
 import IPlane = FlightInformation.IPlane;
+import { flightInformation } from '../data/mock-data';
 
 export class GPSManager {
     private socket: SocketIO.Namespace;
@@ -27,12 +28,12 @@ export class GPSManager {
                 min: 0,
             },
             start: {
-                lat: 54.66112372206639,
-                lng: -1.8896484375
+                lat: flightInformation[0].start.latitude,
+                lng: flightInformation[0].start.longitude
             },
             dest: {
-                lat: 52.36218321674427,
-                lng: 4.921875
+                lat: flightInformation[0].end.latitude,
+                lng: flightInformation[0].end.longitude
             },
             dist: 0,
         };
