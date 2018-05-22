@@ -86,6 +86,8 @@ export declare namespace FlightInformation {
         dist: number,
         height: number,
         speed: number,
+
+        time: number
     }
 }
 
