@@ -20,7 +20,7 @@
       <span>Honolulu</span>
     </h1>
     <div class="content p-2">
-      {{ planeDescription$ | async }}
+      {{ destDescription$ | async }}
     </div>
   </div>
   <div class="col-12 col-md-6 block">
@@ -32,7 +32,7 @@
         />
         </svg>
 
-        <mwl-gauge #f [max]="1000" [dialStartAngle]="-90" [dialEndAngle]="-90.001" [animationDuration]="1" [value]="speed$ | async"
+        <mwl-gauge #f [max]="1000" [dialStartAngle]="-90" [dialEndAngle]="-90.001" [animationDuration]="1" [value]="speed$ | async" [label]="speedLabelFn"
           i18n-label></mwl-gauge>
 
         <div class="description">Speed</div>

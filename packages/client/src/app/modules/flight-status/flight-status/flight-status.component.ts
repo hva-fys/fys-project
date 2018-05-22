@@ -57,10 +57,7 @@ export class FlightStatusComponent implements OnInit, OnDestroy, ILoggable {
     map(plane => plane.speed),
   );
 
-  public speedLabel$: Observable<string> = this.$flightStatus.state.plane$.pipe(
-    map(plane => `${plane.speed} km/h`)
-  );
-
+  public speedLabelFn = (speed: number) => `${speed} km/h`;
 
   constructor(private $flightStatus: FlightStatusService, private $wikipedia: WikipediaService) {
     this.airplanes.set('a320', './assets/images/airplanes/a320.jpg');
