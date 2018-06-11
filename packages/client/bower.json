@@ -1,0 +1,20 @@
+{
+  "name": "fasten-your-seatbelts",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Abdel El-Medny <abdel@springtree.nl>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/hva-fys/fys-project",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "game-snakes": "^0.3.1"
+  }
+}
