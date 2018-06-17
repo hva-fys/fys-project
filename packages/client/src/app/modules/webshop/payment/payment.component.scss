@@ -17,11 +17,6 @@ main {
   position: relative;
 }
 
-mat-card mat-card-header div[mat-card-avatar] {
-  background-image: url('assets/users/robert.jpg');
-  background-size: cover;
-}
-
 mat-card mat-card-subtitle {
   display: flex;
   align-items: center;

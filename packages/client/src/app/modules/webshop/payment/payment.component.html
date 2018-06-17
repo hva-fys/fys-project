@@ -5,8 +5,10 @@
 <main class="row justify-content-center p-3 mx-2 mx-md-5">
   <mat-card class="col-12 col-md-4">
     <mat-card-header>
-      <div mat-card-avatar></div>
-      <mat-card-title>Robert </mat-card-title>
+      <div mat-card-avatar>
+        <mat-icon>account_circle</mat-icon>
+      </div>
+      <mat-card-title>{{ $sessionService.currentUser.name }} </mat-card-title>
       <mat-card-subtitle>
         We have prepared your payment
       </mat-card-subtitle>

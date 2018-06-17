@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { filter, map } from 'rxjs/operators';
 import { StateService } from '../state.service';
+import { SessionServiceService } from '../../../services/session-service.service';
 
 @Component({
   selector: 'fys-payment',
@@ -16,7 +17,7 @@ export class PaymentComponent implements OnInit {
   );
 
 
-  constructor(private state$: StateService) { }
+  constructor(private state$: StateService, public $sessionService: SessionServiceService) { }
 
   ngOnInit() {
   }

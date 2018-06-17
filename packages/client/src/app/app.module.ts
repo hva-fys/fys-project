@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { WikipediaService } from './services/wikipedia.service';
 import { JsonpModule } from '@angular/http';
+import { SessionServiceService } from './services/session-service.service';
 
 @NgModule({
   declarations: [
@@ -32,8 +33,12 @@ import { JsonpModule } from '@angular/http';
     HttpClientModule,
     JsonpModule
   ],
-  providers: [FlightStatusService, WikipediaService],
+  providers: [FlightStatusService, WikipediaService, SessionServiceService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private $sessionService: SessionServiceService) {
+    this.$sessionService.check();
+  }
+ }
