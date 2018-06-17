@@ -8,7 +8,7 @@
     <span @fadeInOut *ngIf="highscore">Highscore {{ highscore }}</span>
     <span [@scaleUp]="animateScore" class="ml-auto">Points {{ score }}</span>
   </div>
-  <canvas #canvas width="400" height="400"></canvas>
+  <canvas #canvas [attr.width]="canvasWidth" height="400"></canvas>
 
    <fys-mobile-controls (change)="moveSnake($event)"></fys-mobile-controls>
 

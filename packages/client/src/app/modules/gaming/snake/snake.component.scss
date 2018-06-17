@@ -33,3 +33,10 @@ canvas {
     background-color: map-get($map: $colors, $key: primary);
   }
 }
+
+
+@media (max-width: 450px) {
+  .playground {
+    margin-top: 135px;
+  }
+}

@@ -87,7 +87,16 @@ export class SnakeComponent implements AfterViewInit {
 
   public highscore: number;
 
+  public get canvasWidth() {
+    return screen.width > 400 ? 400 : (screen.width - 10);
+  }
+
   @HostListener('window:keydown', ['$event']) moveSnake(e: KeyboardEvent| { code: string }) {
+
+    if ( e instanceof KeyboardEvent ) {
+      e.preventDefault();
+    }
+
     // prevent snake from backtracking on itself
     if (e.code === 'ArrowLeft' && this.snake.dx === 0) {
       this.snake.dx = -this.grid;
