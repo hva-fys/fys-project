@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 interface IMobileControlChange {
   code: string;
@@ -9,7 +9,7 @@ interface IMobileControlChange {
   templateUrl: './mobile-controls.component.html',
   styleUrls: ['./mobile-controls.component.scss']
 })
-export class MobileControlsComponent implements OnInit {
+export class MobileControlsComponent {
 
   @Output() change = new EventEmitter<IMobileControlChange>();
 
