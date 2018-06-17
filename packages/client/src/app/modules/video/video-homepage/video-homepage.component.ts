@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IVideo, videos } from '../video';
 
 @Component({
   selector: 'fys-video-homepage',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./video-homepage.component.scss']
 })
 export class VideoHomepageComponent implements OnInit {
+
+  public videos: IVideo[] = videos;
 
   constructor() { }
 

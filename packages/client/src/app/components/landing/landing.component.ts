@@ -28,7 +28,9 @@ export class LandingComponent implements OnInit {
       description: `Hold on tight, and enjoy the Flight! Track your flight with live information from the cockpit.`,
       route: 'flight-status'},
     { title: 'Video', icon: 'video_library',
-      description: `Do you just settle down and laugh at a comedy? Or prefer to let time fly with watching an exciting thriller?`},
+      description: `Do you just settle down and laugh at a comedy? Or prefer to let time fly with watching an exciting thriller?`,
+      route: 'video'
+    },
     { title: 'Audio', icon: 'audiotrack',
       description: `Listen to music from our wide range and dream away while we take you to your destination.`,
       route: 'audio' }
