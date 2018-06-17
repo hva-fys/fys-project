@@ -1,0 +1,16 @@
+<div class="button-controls d-flex flex-column">
+  <button mat-button class="mx-auto" (click)="change({code: 'ArrowUp'})">
+    <mat-icon>arrow_upward</mat-icon>
+  </button>
+  <div class="mx-auto">
+    <button mat-button (click)="change({code: 'ArrowLeft'})">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button mat-button (click)="change({code: 'ArrowDown'})">
+      <mat-icon>arrow_downward</mat-icon>
+    </button>
+    <button mat-button (click)="change({code: 'ArrowRight'})">
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </div>
+</div>

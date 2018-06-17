@@ -33,10 +33,3 @@ canvas {
     background-color: map-get($map: $colors, $key: primary);
   }
 }
-
-.button-controls {
-  button {
-    width: 100px;
-    height: 100px;
-  }
-}
