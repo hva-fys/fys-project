@@ -1,0 +1,42 @@
+@import './variables.scss';
+
+
+@keyframes gradient-animation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.playground {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+canvas {
+  display: block;
+  background: linear-gradient(270deg, #c51788, #5a105d, #463c8f);
+  animation: gradient-animation 30s ease infinite;
+  background-size: 800% 800%;
+}
+
+.score {
+  color: white;
+  position: absolute;
+  top: -24px;
+  width: 100%;
+  display: flex;
+  span {
+    color: white;
+    padding: 0px 8px;
+    background-color: map-get($map: $colors, $key: primary);
+  }
+}
+
+.button-controls {
+  button {
+    width: 100px;
+    height: 100px;
+  }
+}
