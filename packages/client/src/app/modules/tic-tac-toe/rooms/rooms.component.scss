@@ -38,6 +38,6 @@ mat-list-item {
 
   mat-card {
     width: calc(100% - #{$host-padding * 2});
-    margin: 8px 0px;
+    margin: 8px auto;
   }
 }
