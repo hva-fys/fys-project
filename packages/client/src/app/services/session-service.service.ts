@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { isEmpty, isObject } from 'lodash';
 
 interface IJWTUser {
-  admin: boolean;
-  sub: string;
-  name: string;
+  email: string;
+  firstname: string;
+  lastname: string;
+  scope: string;
+  user_id: string;
 }
 
 @Injectable()
