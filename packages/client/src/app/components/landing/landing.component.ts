@@ -22,7 +22,7 @@ export class LandingComponent implements OnInit {
     },
     { title: 'Gaming', icon: 'videogame_asset',
       description: `Are you just staring at the clouds and do you want some variety? Test your gaming skills with one of our games.`,
-      route: 'tic-tac-toe'
+      route: 'gaming'
     },
     { title: 'Flight info', icon: 'my_location',
       description: `Hold on tight, and enjoy the Flight! Track your flight with live information from the cockpit.`,
