@@ -1,10 +1,14 @@
 <mat-card *ngFor="let game of games" class="my-2">
-  <mat-card-title>
-    {{ game.name }}
-  </mat-card-title>
-  <mat-card-actions class="d-flex justify-content-end">
-    <button mat-button [routerLink]="game.route" i18n>
+  <mat-card-title class="d-flex justify-content-between">
+    <span>{{ game.name }}</span>
+
+    <button  color="primary" mat-button [routerLink]="game.route" i18n>
       Play
     </button>
-  </mat-card-actions>
+  </mat-card-title>
+  <mat-card-content *ngIf="game.description | async" @fadeInOut>
+    <p>
+      {{ game.description | async }}
+    </p>
+  </mat-card-content>
 </mat-card>
