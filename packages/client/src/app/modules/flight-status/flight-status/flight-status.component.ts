@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import {FlightStatusService} from '../../../services/flight-status.service';
-import {takeUntil, map, first} from 'rxjs/operators';
-import {Subject} from 'rxjs/Subject';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FlightInformation } from 'fys';
-import { WikipediaService } from '../../../services/wikipedia.service';
-import { tap } from 'rxjs/operators';
-import { Logger, ILoggable } from '../../../shared/logger';
+import { isNil } from 'lodash';
 import { Observable } from 'rxjs/Observable';
+import { filter, flatMap, map, take } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
+import { FlightStatusService } from '../../../services/flight-status.service';
+import { WikipediaService } from '../../../services/wikipedia.service';
+import { ILoggable, Logger } from '../../../shared/logger';
 
 @Logger()
 @Component({
@@ -65,7 +65,12 @@ export class FlightStatusComponent implements OnInit, OnDestroy, ILoggable {
     this.airplanes.set('737400', './assets/images/airplanes/737400.jpg');
     this.airplanes.set('737800', './assets/images/airplanes/737800.jpg');
 
-    this.destDescription$ = this.$wikipedia.getIntro('Amsterdam');
+
+    this.destDescription$ = this.$flightStatus.getCurrentFlight().pipe(
+      take(1),
+      filter(value => !isNil(value)),
+      flatMap( flight => this.$wikipedia.getIntro(flight.end.name) )
+    );
 
     this.$flightStatus.state.plane$.subscribe( plane => {
       this.logger.log(plane.time);
