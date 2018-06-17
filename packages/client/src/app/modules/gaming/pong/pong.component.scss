@@ -1,0 +1,87 @@
+@import './variables.scss';
+
+
+@keyframes gradient-animation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+#root {
+  position: relative;
+  width: 610px;
+  height: 456px;
+  background: linear-gradient(270deg, #c51788, #5a105d, #463c8f);
+  animation: gradient-animation 30s ease infinite;
+  background-size: 800% 800%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#root .header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding-left: 15px;
+  padding-right: 15px;
+  justify-content: space-between;
+  text-align: center;
+}
+
+#root .header .score {
+  position: absolute;
+  width: 200px;
+  left: 50%;
+  top: 50%;
+  color: white;
+  transform: translate(-50%, -50%);
+}
+
+#root .header .buttons button {
+  border: none;
+  padding: 5px;
+  background: white;
+  margin-right: 15px;
+  padding: 0px 8px;
+  font-family: Roboto;
+  border-radius: 4px;
+}
+
+#root .header .buttons button:last-child {
+  margin-right: 0;
+}
+
+#root .header .tools label {
+  padding-left: 5px;
+  padding-right: 5px;
+  color: white;
+  margin: 0;
+}
+
+#root .winner {
+  position: absolute;
+  display: none;
+  width: 200px;
+  height: 50px;
+  left: 50%;
+  top: calc(50% + 50px/2);
+  background: map-get($colors, primary);
+  color: white;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%);
+}
+
+#root .winner.open {
+  display: flex;
+  border-radius: 4px;
+}
+
+canvas {
+  margin: 0 auto;
+  display: block;
+  border-radius: 4px;
+}

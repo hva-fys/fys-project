@@ -19,8 +19,12 @@ export class GamingHomeComponent implements OnInit {
       route: '../tic-tac-toe'
     },
     {
-      name: 'snake',
+      name: 'Snake',
       route: 'snake'
+    },
+    {
+      name: 'Pong',
+      route: 'pong'
     }
   ];
 
