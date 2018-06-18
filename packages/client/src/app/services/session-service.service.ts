@@ -16,7 +16,13 @@ export class SessionServiceService {
     let currentUser = this._currentUser;
 
     if (isEmpty(currentUser)) {
-      currentUser = JSON.parse(localStorage.getItem('current-user')) || [];
+      currentUser = JSON.parse(localStorage.getItem('current-user')) || {
+        email: '',
+        firstname: 'Nick',
+        lastname: 'Vlug',
+        scope: null,
+        user_id: null
+      };
       // We are updating the current user so we ensure this getter doesnt return new values every time its called
       // which would cause our view to re-render everytime
       //
